@@ -8,11 +8,17 @@ import java.util.List;
  */
 public class Console {
 
-    public void printWelcome(PrintStream out) {
+    private PrintStream out;
+
+    public Console(PrintStream out) {
+        this.out = out;
+    }
+
+    public void printWelcome() {
         out.println("Welcome to Biblioteca!");
     }
 
-    public void printBookList(List<String> books, PrintStream out) {
+    public void printBookList(List<String> books) {
         for (String book : books) {
             out.println(book);
         }
