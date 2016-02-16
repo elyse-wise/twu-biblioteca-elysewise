@@ -30,7 +30,7 @@ public class ConsoleTest {
 
     @Test
     public void testNoBooksArePrintedWhenLibraryIsEmpty() {
-        List<String> books = new ArrayList<String>();
+        List<Book> books = new ArrayList<Book>();
 
         console.printBookList(books);
         verify(out, never()).println();
@@ -38,25 +38,37 @@ public class ConsoleTest {
 
     @Test
     public void testOneBookIsPrintedWhenOneBookIsInLibrary() {
-        List<String> books = new ArrayList<String>();
-        books.add("A Tale of Two Cities");
+        List<Book> books = new ArrayList<Book>();
+        Book testBook = mock(Book.class);
+        books.add(testBook);
 
         console.printBookList(books);
-        verify(out, times(1)).println("A Tale of Two Cities");
+        verify(testBook, times(1)).getDetailsString();
     }
 
     @Test
     public void testAllBooksPrintedWhenMultipleBooksAreInLibrary() {
-        List<String> books = new ArrayList<String>();
-        books.add("A Tale of Two Cities");
-        books.add("More Tales about Cities");
-        books.add("Head First Java");
+        List<Book> books = new ArrayList<Book>();
+        Book testBook1 = mock(Book.class);
+        Book testBook2 = mock(Book.class);
+        Book testBook3 = mock(Book.class);
+        books.add(testBook1);
+        books.add(testBook2);
+        books.add(testBook3);
 
         console.printBookList(books);
-        verify(out, times(1)).println("A Tale of Two Cities");
-        verify(out, times(1)).println("More Tales about Cities");
-        verify(out, times(1)).println("Head First Java");
-
+        verify(testBook1, times(1)).getDetailsString();
+        verify(testBook2, times(1)).getDetailsString();
+        verify(testBook3, times(1)).getDetailsString();
     }
 
+    @Test
+    public void testColumnsArePrintedWhenShowingBookList() {
+        List<Book> books = new ArrayList<Book>();
+        Book testBook = mock(Book.class);
+        books.add(testBook);
+
+        console.printBookList(books);
+        verify(testBook, times(1)).getColumnString();
+    }
 }

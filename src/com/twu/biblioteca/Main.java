@@ -9,10 +9,10 @@ public class Main {
         Console console = new Console(System.out);
         console.printWelcome();
 
-        List<String> books = new ArrayList<String>();
-        books.add("Book A");
-        books.add("Book B");
-        books.add("Book C");
+        List<Book> books = new ArrayList<Book>();
+        books.add(new Book("Book A", "Author A", "Year A"));
+        books.add(new Book("Book B", "Author B", "Year B"));
+        books.add(new Book("Book C", "Author C", "Year C"));
 
         console.printBookList(books);
     }

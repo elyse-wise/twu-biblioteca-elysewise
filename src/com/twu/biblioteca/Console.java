@@ -18,9 +18,12 @@ public class Console {
         out.println("Welcome to Biblioteca!");
     }
 
-    public void printBookList(List<String> books) {
-        for (String book : books) {
-            out.println(book);
+    public void printBookList(List<Book> books) {
+        if (!books.isEmpty()) {
+            out.println(books.get(0).getColumnString());
+        }
+        for (Book b : books) {
+            out.println(b.getDetailsString());
         }
     }
 }
