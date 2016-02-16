@@ -15,7 +15,10 @@ public class Main {
         books.add(new Book("Book C", "Author C", "Year C"));
 
         console.printMenuOptions();
+        String command = console.getUserCommand(System.in);
 
-        console.printBookList(books);
+        if (command.equals("l")) {
+            console.printBookList(books);
+        }
     }
 }

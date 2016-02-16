@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -28,7 +28,20 @@ public class Console {
     }
 
     public void printMenuOptions() {
-        out.print("l: ");
+        out.println("Menu Options:");
+        out.print("\tl: ");
         out.println("List Books");
+    }
+
+    public String getUserCommand(InputStream in) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        System.out.print("Enter Command: ");
+        String command = null;
+        try {
+            command = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return command;
     }
 }
