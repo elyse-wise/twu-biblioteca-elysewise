@@ -16,6 +16,7 @@ public class Main {
     private static Map<String, String> buildMenuOptions() {
         Map<String, String> menuOptions = new HashMap<String, String>();
         menuOptions.put("L", "List Books");
+        menuOptions.put("C", "Checkout Book");
         menuOptions.put("Q", "Quit");
         return menuOptions;
     }

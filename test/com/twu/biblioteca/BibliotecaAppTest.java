@@ -1,11 +1,14 @@
 package com.twu.biblioteca;
 
+import com.sun.source.tree.AssertTree;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
 
 import java.util.*;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -99,6 +102,72 @@ public class BibliotecaAppTest {
         application.run();
         verify(console, never()).warnInvalidMenuOption();
         verify(console, times(3)).printBookList(books);
+    }
+
+    @Test
+    public void numberOfBooksInLibraryReturnsZeroForEmptyBookList() {
+        assertEquals(0, application.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void numberOfBooksInLibraryReturnsThreeForBookListOfThree() {
+
+        //add 3 books to the library
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+
+        application = new BibliotecaApp(console, books, menuOptions);
+        assertEquals(3, application.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void testValidCheckoutBookOptionRemovesBookFromList() {
+
+        //add 2 books to the library
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        application = new BibliotecaApp(console, books, menuOptions);
+
+        String commands[] = {"C", "1", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        assertEquals(1, application.numberOfBooksInLibrary());
+    }
+
+
+    @Test
+    public void testInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
+
+        //add 2 books to the library
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        application = new BibliotecaApp(console, books, menuOptions);
+
+        String commands[] = {"C", "193738", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        assertEquals(2, application.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void testNegativeInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
+
+        //add 2 books to the library
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        application = new BibliotecaApp(console, books, menuOptions);
+
+        String commands[] = {"C", "-23", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        assertEquals(2, application.numberOfBooksInLibrary());
     }
 
     private void setUserInput(String inputs[]) {

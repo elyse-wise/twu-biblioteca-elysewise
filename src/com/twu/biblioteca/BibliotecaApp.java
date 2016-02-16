@@ -20,6 +20,10 @@ public class BibliotecaApp {
         this.menuOptions = menuOptions;
     }
 
+    public int numberOfBooksInLibrary() {
+        return books.size();
+    }
+
     public void run() {
         console.printWelcome();
 
@@ -31,6 +35,12 @@ public class BibliotecaApp {
 
             if (command != null && command.equalsIgnoreCase("L")) {
                 console.printBookList(books);
+            } else if (command != null && command.equalsIgnoreCase("C")) {
+                console.printBookList(books);
+                int selection = Integer.parseInt(console.getUserCommand());
+                if (selection > 0 && selection < books.size()) {
+                    books.remove(selection);
+                }
             } else if (command != null && command.equalsIgnoreCase("Q")) {
                 break;
             } else {
