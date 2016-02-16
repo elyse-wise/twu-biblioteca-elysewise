@@ -14,6 +14,8 @@ public class Main {
         books.add(new Book("Book B", "Author B", "Year B"));
         books.add(new Book("Book C", "Author C", "Year C"));
 
+        console.printMenuOptions();
+
         console.printBookList(books);
     }
 }

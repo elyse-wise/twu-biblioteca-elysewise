@@ -26,4 +26,9 @@ public class Console {
             out.println(b.getDetailsString());
         }
     }
+
+    public void printMenuOptions() {
+        out.print("l: ");
+        out.println("List Books");
+    }
 }

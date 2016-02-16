@@ -71,4 +71,10 @@ public class ConsoleTest {
         console.printBookList(books);
         verify(testBook, times(1)).getColumnString();
     }
+
+    @Test
+    public void testMenuDisplayHasListBooksOption() {
+        console.printMenuOptions();
+        verify(out).println("List Books");
+    }
 }
