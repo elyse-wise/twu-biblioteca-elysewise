@@ -38,4 +38,12 @@ public class BookTest {
         assertTrue(details.contains("MyYearPublished"));
     }
 
+    @Test
+    public void getColumnsStringReturnsExpectedColumns() {
+        String details = book.getColumnString();
+        assertTrue(details.contains("Title"));
+        assertTrue(details.contains("Author"));
+        assertTrue(details.contains("Year Published"));
+    }
+
 }

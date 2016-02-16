@@ -15,7 +15,11 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
+    public String getColumnString() {
+        return String.format("%-30s %-30s %-30s", "Title", "Author", "Year Published");
+    }
+
     public String getDetailsString() {
-        return title + author + yearPublished;
+        return String.format("%-30s %-30s %-30s", title, author, yearPublished);
     }
 }
