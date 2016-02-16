@@ -2,15 +2,18 @@ package com.twu.biblioteca;
 
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Elyse on 16/02/2016.
  */
 public class Console {
 
+    private InputStream in;
     private PrintStream out;
 
-    public Console(PrintStream out) {
+    public Console(InputStream in, PrintStream out) {
+        this.in = in;
         this.out = out;
     }
 
@@ -27,15 +30,21 @@ public class Console {
         }
     }
 
-    public void printMenuOptions() {
+    public void printMenuOptions(Map<String, String> menuOptions) {
         out.println("Menu Options:");
-        out.print("\tl: ");
-        out.println("List Books");
+
+        for (Map.Entry<String, String> menuOption : menuOptions.entrySet()) {
+            out.print("\t " + menuOption.getKey() + " => ");
+            out.println(menuOption.getValue());
+        }
     }
 
-    public String getUserCommand(InputStream in) {
+    public void promptUser() {
+        out.print("Enter Command: ");
+    }
+
+    public String getUserCommand() {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        System.out.print("Enter Command: ");
         String command = null;
         try {
             command = br.readLine();

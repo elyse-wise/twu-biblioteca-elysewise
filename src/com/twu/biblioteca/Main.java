@@ -1,24 +1,24 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
-        Console console = new Console(System.out);
-        console.printWelcome();
+        Console console = new Console(System.in, System.out);
 
         List<Book> books = new ArrayList<Book>();
         books.add(new Book("Book A", "Author A", "Year A"));
         books.add(new Book("Book B", "Author B", "Year B"));
         books.add(new Book("Book C", "Author C", "Year C"));
 
-        console.printMenuOptions();
-        String command = console.getUserCommand(System.in);
+        Map<String, String> menuOptions = new HashMap<String, String>();
+        menuOptions.put("l", "List Books");
 
-        if (command.equals("l")) {
-            console.printBookList(books);
-        }
+        BibliotecaApp application = new BibliotecaApp(console, books, menuOptions);
+        application.run();
     }
 }

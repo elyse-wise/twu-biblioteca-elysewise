@@ -4,21 +4,26 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
 public class ConsoleTest {
 
+    private InputStream in;
     private PrintStream out;
     private Console console;
 
     @Before
     public void setUpStreams() {
+        in = mock(InputStream.class);
         out = mock(PrintStream.class);
-        console = new Console(out);
+        console = new Console(in, out);
     }
 
 
@@ -74,7 +79,11 @@ public class ConsoleTest {
 
     @Test
     public void testMenuDisplayHasListBooksOption() {
-        console.printMenuOptions();
+        Map<String, String> menuOptions = new HashMap<String, String>();
+
+        menuOptions.put("l", "List Books");
+
+        console.printMenuOptions(menuOptions);
         verify(out).println("List Books");
     }
 }
