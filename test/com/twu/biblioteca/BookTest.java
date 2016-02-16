@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +14,7 @@ public class BookTest {
 
     private Book book;
 
+
     @Before
     public void setup() {
         book = new Book("MyTitle", "MyAuthor", "MyYearPublished");
@@ -19,17 +22,20 @@ public class BookTest {
 
     @Test
     public void testGetBookDetailsReturnsTitle() {
-        // TODO
+        String details = book.getDetailsString();
+        assertTrue(details.contains("MyTitle"));
     }
 
     @Test
     public void testGetBookDetailsReturnsAuthor() {
-        // TODO
+        String details = book.getDetailsString();
+        assertTrue(details.contains("MyAuthor"));
     }
 
     @Test
     public void getTestGetBookDetailsReturnsYearPublished() {
-        // TODO
+        String details = book.getDetailsString();
+        assertTrue(details.contains("MyYearPublished"));
     }
 
 }

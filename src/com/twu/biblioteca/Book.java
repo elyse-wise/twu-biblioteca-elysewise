@@ -16,7 +16,6 @@ public class Book {
     }
 
     public String getDetailsString() {
-        // TODO return book details
-        return null;
+        return title + author + yearPublished;
     }
 }
