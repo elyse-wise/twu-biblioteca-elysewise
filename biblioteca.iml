@@ -9,6 +9,20 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit-4.11" level="project" />
+    <orderEntry type="module-library">
+      <library name="mockito">
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/buildSrc/src/main/groovy" />
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/src/test/java" />
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/subprojects/extTest/src/test/java" />
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/subprojects/testng/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/mockito-master.zip!/mockito-master/subprojects/testng/src/test/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="mockito-all-1.9.5" level="project" />
   </component>
 </module>
-
