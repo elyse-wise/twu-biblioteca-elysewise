@@ -86,4 +86,10 @@ public class ConsoleTest {
         console.printMenuOptions(menuOptions);
         verify(out).println("List Books");
     }
+
+    @Test
+    public void testWarnInvalidMenuOption() {
+        console.warnInvalidMenuOption();
+        verify(out).println("Select a valid option!");
+    }
 }

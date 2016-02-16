@@ -55,6 +55,19 @@ public class BibliotecaAppTest {
         verify(console, never()).printBookList(books);
     }
 
+    @Test
+    public void testShowsInvalidOptionIfUserEntersUnknownCommand() {
+        setUserInput("(*&$&*^$(&#$^(#&");
+        application.run();
+        verify(console, times(1)).warnInvalidMenuOption();
+    }
+
+    @Test
+    public void testShowsInvalidOptionIfUserEntersEmptyString() {
+        setUserInput("");
+        application.run();
+        verify(console, times(1)).warnInvalidMenuOption();
+    }
     private void setUserInput(String input) {
         when(console.getUserCommand()).thenReturn(input);
     }

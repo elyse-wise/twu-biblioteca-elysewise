@@ -53,4 +53,10 @@ public class Console {
         }
         return command;
     }
+
+    public void warnInvalidMenuOption() {
+        out.println("Select a valid option!");
+    }
+
+
 }

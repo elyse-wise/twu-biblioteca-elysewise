@@ -28,6 +28,8 @@ public class BibliotecaApp {
 
         if (command != null && command.equals("l")) {
             console.printBookList(books);
+        } else {
+            console.warnInvalidMenuOption();
         }
     }
 
