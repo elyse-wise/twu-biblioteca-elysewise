@@ -23,13 +23,19 @@ public class BibliotecaApp {
     public void run() {
         console.printWelcome();
         console.printMenuOptions(menuOptions);
-        console.promptUser();
-        String command = console.getUserCommand();
 
-        if (command != null && command.equals("l")) {
-            console.printBookList(books);
-        } else {
-            console.warnInvalidMenuOption();
+        while (true) {
+
+            console.promptUser();
+            String command = console.getUserCommand();
+
+            if (command != null && command.equals("l")) {
+                console.printBookList(books);
+            } else if (command != null && command.equals("Q")) {
+                break;
+            } else {
+                console.warnInvalidMenuOption();
+            }
         }
     }
 

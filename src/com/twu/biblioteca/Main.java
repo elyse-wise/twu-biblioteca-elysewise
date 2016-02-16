@@ -17,6 +17,8 @@ public class Main {
 
         Map<String, String> menuOptions = new HashMap<String, String>();
         menuOptions.put("l", "List Books");
+        menuOptions.put("Q", "Quit");
+
 
         BibliotecaApp application = new BibliotecaApp(console, books, menuOptions);
         application.run();

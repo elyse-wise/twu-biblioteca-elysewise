@@ -2,11 +2,9 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.AdditionalAnswers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.mockito.Mockito.*;
 
@@ -31,44 +29,72 @@ public class BibliotecaAppTest {
 
     @Test
     public void testWelcomeAppearsOnRun() {
+        String commands[] = {"Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console).printWelcome();
     }
 
     @Test
     public void testMenuAppearsOnRun() {
+        String commands[] = {"Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console).printMenuOptions(menuOptions);
     }
 
     @Test
     public void testBookListIsDisplayedWhenUserEntersL() {
-        setUserInput("l");
+        String commands[] = {"l", "Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console).printBookList(books);
     }
 
     @Test
     public void testBookListIsNotDisplayedWhenUserEntersSomethingElse() {
-        setUserInput("lamp");
+        String commands[] = {"lamp", "Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console, never()).printBookList(books);
     }
 
     @Test
     public void testShowsInvalidOptionIfUserEntersUnknownCommand() {
-        setUserInput("(*&$&*^$(&#$^(#&");
+        String commands[] = {"(*&$&*^$(&#$^(#&", "Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console, times(1)).warnInvalidMenuOption();
     }
 
     @Test
     public void testShowsInvalidOptionIfUserEntersEmptyString() {
-        setUserInput("");
+        String commands[] = {"", "Q"};
+        setUserInput(commands);
+
         application.run();
         verify(console, times(1)).warnInvalidMenuOption();
     }
-    private void setUserInput(String input) {
-        when(console.getUserCommand()).thenReturn(input);
+
+    @Test
+    public void testApplicationLeavesMenuWhenUserEntersQ() {
+        String commands[] = {"l", "l", "l", "Q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, times(3)).printBookList(books);
+        verify(console, times(4)).promptUser();
     }
+
+    private void setUserInput(String inputs[]) {
+        List<String> inputList = Arrays.asList(inputs);
+        when(console.getUserCommand()).thenAnswer(AdditionalAnswers.returnsElementsOf(inputList));
+    }
+
+
 }
