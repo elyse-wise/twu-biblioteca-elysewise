@@ -153,6 +153,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void testInvalidCheckoutBookOptionWarnsUser() {
+        String commands[] = {"C", "-23", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, times(1)).warnInvalidBookSelection();
+    }
+
+    @Test
     public void testInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
 
         //add 2 books to the library

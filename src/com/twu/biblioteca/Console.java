@@ -75,6 +75,10 @@ public class Console {
         out.println("Select a valid option!");
     }
 
+    public void warnInvalidBookSelection() {
+        out.println("That book is not available");
+    }
+
     public void thankUserForCheckingOut() {
         out.println("Thank you! Enjoy the book");
     }

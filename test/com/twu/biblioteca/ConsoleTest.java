@@ -94,6 +94,12 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testWarnInvalidBookSelection() {
+        console.warnInvalidBookSelection();
+        verify(out).println("That book is not available");
+    }
+
+    @Test
     public void testThankUserForCheckingOut() {
         console.thankUserForCheckingOut();
         verify(out).println("Thank you! Enjoy the book");

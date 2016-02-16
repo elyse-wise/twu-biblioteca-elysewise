@@ -41,6 +41,8 @@ public class BibliotecaApp {
                 if (selection > 0 && selection < books.size()) {
                     books.remove(selection);
                     console.thankUserForCheckingOut();
+                } else {
+                    console.warnInvalidBookSelection();
                 }
             } else if (command != null && command.equalsIgnoreCase("Q")) {
                 break;
