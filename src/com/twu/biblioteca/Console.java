@@ -13,6 +13,8 @@ public class Console {
     }
 
     public void printBookList(List<String> books, PrintStream out) {
-        out.println(books.get(0));
+        for (String book : books) {
+            out.println(book);
+        }
     }
 }
