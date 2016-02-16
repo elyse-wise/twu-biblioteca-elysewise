@@ -91,6 +91,16 @@ public class BibliotecaAppTest {
         verify(console, times(4)).promptUser();
     }
 
+    @Test
+    public void testApplicationIgnoresCaseForUserCommands() {
+        String commands[] = {"l", "L", "l", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(console, times(3)).printBookList(books);
+    }
+
     private void setUserInput(String inputs[]) {
         List<String> inputList = Arrays.asList(inputs);
         when(console.getUserCommand()).thenAnswer(AdditionalAnswers.returnsElementsOf(inputList));

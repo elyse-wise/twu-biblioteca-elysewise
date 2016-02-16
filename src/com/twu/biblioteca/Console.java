@@ -22,12 +22,25 @@ public class Console {
     }
 
     public void printBookList(List<Book> books) {
-        if (!books.isEmpty()) {
-            out.println(books.get(0).getColumnString());
+        out.println("Currently Available Books:");
+
+        for (int i = 0; i < books.size(); i++) {
+            if (i == 0) {
+                printBookColumns(books.get(0));
+            }
+
+            printBookDetails(i, books.get(i));
         }
-        for (Book b : books) {
-            out.println(b.getDetailsString());
-        }
+    }
+
+    public void printBookColumns(Book book) {
+        out.print(String.format("\t%-4s", ""));
+        out.println(book.getColumnString());
+    }
+
+    public void printBookDetails(int i, Book book) {
+        out.print(String.format("\t%-4s", i + "."));
+        out.println(book.getDetailsString());
     }
 
     public void printMenuOptions(Map<String, String> menuOptions) {
@@ -40,7 +53,7 @@ public class Console {
     }
 
     public void promptUser() {
-        out.print("Enter Command: ");
+        out.print("> Enter Option: ");
     }
 
     public String getUserCommand() {
@@ -58,5 +71,8 @@ public class Console {
         out.println("Select a valid option!");
     }
 
+    public void printGap() {
+        out.println();
+    }
 
 }
