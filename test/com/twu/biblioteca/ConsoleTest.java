@@ -92,4 +92,10 @@ public class ConsoleTest {
         console.warnInvalidMenuOption();
         verify(out).println("Select a valid option!");
     }
+
+    @Test
+    public void testThankUserForCheckingOut() {
+        console.thankUserForCheckingOut();
+        verify(out).println("Thank you! Enjoy the book");
+    }
 }

@@ -71,6 +71,10 @@ public class Console {
         out.println("Select a valid option!");
     }
 
+    public void thankUserForCheckingOut() {
+        out.println("Thank you! Enjoy the book");
+    }
+
     public void printGap() {
         out.println();
     }

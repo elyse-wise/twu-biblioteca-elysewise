@@ -137,6 +137,21 @@ public class BibliotecaAppTest {
         assertEquals(1, application.numberOfBooksInLibrary());
     }
 
+    @Test
+    public void testValidCheckoutBookOptionGivesUserThankYouMessage() {
+
+        //add 2 books to the library
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        application = new BibliotecaApp(console, books, menuOptions);
+
+        String commands[] = {"C", "1", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(console, times(1)).thankUserForCheckingOut();
+    }
 
     @Test
     public void testInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {

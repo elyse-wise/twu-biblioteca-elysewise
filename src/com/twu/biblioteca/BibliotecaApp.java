@@ -40,6 +40,7 @@ public class BibliotecaApp {
                 int selection = Integer.parseInt(console.getUserCommand());
                 if (selection > 0 && selection < books.size()) {
                     books.remove(selection);
+                    console.thankUserForCheckingOut();
                 }
             } else if (command != null && command.equalsIgnoreCase("Q")) {
                 break;
