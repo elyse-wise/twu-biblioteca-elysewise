@@ -52,8 +52,12 @@ public class Console {
         }
     }
 
-    public void promptUser() {
-        out.print("> Enter Option: ");
+    public void promptUserForMenuOption() {
+        out.print("> Enter Menu Option: ");
+    }
+
+    public void promptUserForBookSelection() {
+        out.print("> Enter Book Code: ");
     }
 
     public String getUserCommand() {

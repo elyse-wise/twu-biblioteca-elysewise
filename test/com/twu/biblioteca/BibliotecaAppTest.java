@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import com.sun.source.tree.AssertTree;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
@@ -91,7 +90,7 @@ public class BibliotecaAppTest {
 
         application.run();
         verify(console, times(3)).printBookList(books);
-        verify(console, times(4)).promptUser();
+        verify(console, times(4)).promptUserForMenuOption();
     }
 
     @Test

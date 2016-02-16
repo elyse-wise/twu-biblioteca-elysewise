@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -30,13 +29,14 @@ public class BibliotecaApp {
         while (true) {
             console.printGap();
             console.printMenuOptions(menuOptions);
-            console.promptUser();
+            console.promptUserForMenuOption();
             String command = console.getUserCommand();
 
             if (command != null && command.equalsIgnoreCase("L")) {
                 console.printBookList(books);
             } else if (command != null && command.equalsIgnoreCase("C")) {
                 console.printBookList(books);
+                console.promptUserForBookSelection();
                 int selection = Integer.parseInt(console.getUserCommand());
                 if (selection > 0 && selection < books.size()) {
                     books.remove(selection);
