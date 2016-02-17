@@ -17,6 +17,7 @@ public class Main {
         menuOperations.add(new ListBooksMenuOperation("L", "List Books"));
         menuOperations.add(new CheckoutBookMenuOperation("C", "Checkout Book"));
         menuOperations.add(new ReturnBookMenuOperation("R", "Return Book"));
+        menuOperations.add(new ListMoviesMenuOperation("LM", "List Movies"));
         menuOperations.add(new QuitMenuOperation("Q", "Quit"));
         return menuOperations;
     }

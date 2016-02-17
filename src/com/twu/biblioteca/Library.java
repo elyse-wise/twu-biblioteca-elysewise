@@ -9,6 +9,7 @@ import java.util.List;
 public class Library {
     private List<Book> availableBooks;
     private List<Book> checkedOutBooks;
+    private List<Movie> availableMovies;
 
     public Library(List<Book> availableBooks) {
         this.availableBooks = availableBooks;
@@ -18,6 +19,12 @@ public class Library {
     public Library(List<Book> availableBooks, List<Book> checkedOutBooks) {
         this.availableBooks = availableBooks;
         this.checkedOutBooks = checkedOutBooks;
+    }
+
+    public Library(List<Book> availableBooks, List<Book> checkedOutBooks, List<Movie> availableMovies) {
+        this.availableBooks = availableBooks;
+        this.checkedOutBooks = checkedOutBooks;
+        this.availableMovies = availableMovies;
     }
 
     public Boolean bookIsAvailable(int bookIndex) {
