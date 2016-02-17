@@ -88,10 +88,10 @@ public class Console {
     }
 
     public void thankUserForReturningBook() {
-        // TODO
+        out.println("Thank you for returning the book");
     }
 
     public void warnInvalidBookSelectionForReturn() {
-        // TODO
+        out.println("That is not a valid book to return");
     }
 }

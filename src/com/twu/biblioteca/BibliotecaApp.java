@@ -47,7 +47,9 @@ public class BibliotecaApp {
                 int selection = Integer.parseInt(console.getUserCommand());
                 if (library.bookIsCheckedOut(selection)) {
                     library.returnBook(selection);
+                    console.thankUserForReturningBook();
                 } else {
+                    console.warnInvalidBookSelectionForReturn();
                 }
             } else if (command != null && command.equalsIgnoreCase("Q")) {
                 break;
