@@ -99,4 +99,28 @@ public class LibraryTest {
         library.checkOutBook(54398);
         assertEquals(3, library.numberOfBooksCheckedOut());
     }
+
+    @Test
+    public void testValidReturnBookOptionAddsBookToAvailableList() {
+        library.returnBook(0);
+        assertEquals(3, library.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void testValidReturnBookOptionRemovesBookFromCheckedOutList() {
+        library.returnBook(0);
+        assertEquals(2, library.numberOfBooksCheckedOut());
+    }
+
+    @Test
+    public void testInvalidReturnBookOptionDoesNotAddBookToAvailableList() {
+        library.returnBook(54398);
+        assertEquals(2, library.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void testInvalidReturnBookOptionDoesNotRemoveBookFromCheckedOutList() {
+        library.returnBook(54398);
+        assertEquals(3, library.numberOfBooksCheckedOut());
+    }
 }

@@ -23,17 +23,21 @@ public class BibliotecaAppTest {
     @Before
     public void setup() {
         console = mock(Console.class);
-        library = buildMockLibraryWithSetBookAmount(3);
+        library = buildMockLibraryWithSetBookAmounts(3, 4);
         menuOptions = new HashMap<String, String>();
         menuOptions.put("l", "List Books");
         application = new BibliotecaApp(console, library, menuOptions);
     }
 
-    private Library buildMockLibraryWithSetBookAmount(int amountOfBooks) {
+    private Library buildMockLibraryWithSetBookAmounts(int numberOfBooksAvailable, int numberOfBooksCheckedOut) {
         library = mock(Library.class);
-        when(library.numberOfBooksInLibrary()).thenReturn(amountOfBooks);
-        for (int i = 0; i < amountOfBooks; i++) {
+        when(library.numberOfBooksInLibrary()).thenReturn(numberOfBooksAvailable);
+        when(library.numberOfBooksCheckedOut()).thenReturn(numberOfBooksCheckedOut);
+        for (int i = 0; i < numberOfBooksAvailable; i++) {
             when(library.bookIsAvailable(i)).thenReturn(true);
+        }
+        for (int i = 0; i < numberOfBooksCheckedOut; i++) {
+            when(library.bookIsCheckedOut(i)).thenReturn(true);
         }
         return library;
     }
@@ -159,6 +163,37 @@ public class BibliotecaAppTest {
         application.run();
         verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).checkOutBook(-23);
+    }
+
+
+    @Test
+    public void testValidReturnBookOptionReturnsBook() {
+        String commands[] = {"R", "1", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(library).returnBook(1);
+    }
+
+    @Test
+    public void testInvalidReturnBookOptionDoesNotReturnBook() {
+        String commands[] = {"R", "193738", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(library, never()).returnBook(193738);
+    }
+
+    @Test
+    public void testNegativeInvalidReturnBookOptionDoesNotReturnBook() {
+        String commands[] = {"R", "-23", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(library, never()).returnBook(193738);
     }
 
     private void setUserInput(String inputs[]) {

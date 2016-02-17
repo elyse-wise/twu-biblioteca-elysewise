@@ -50,4 +50,7 @@ public class Library {
         }
     }
 
+    public void returnBook(int bookIndex) {
+        // TODO
+    }
 }
