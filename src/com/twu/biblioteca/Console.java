@@ -104,4 +104,8 @@ public class Console {
     public void printReturnBooksHeader() {
         out.println("Books Available For Return:");
     }
+
+    public void printExitMessage() {
+        out.println("Exiting Biblioteca...");
+    }
 }

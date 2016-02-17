@@ -34,6 +34,12 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testExitMessageIsDisplayed() {
+        console.printExitMessage();
+        verify(out).println("Exiting Biblioteca...");
+    }
+
+    @Test
     public void testHeaderIsDisplayedOnListBooks() {
         console.printListBooksHeader();
         verify(out).println("Books Currently In Library:");
