@@ -4,6 +4,7 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -94,10 +95,12 @@ public class ConsoleTest {
 
     @Test
     public void testMenuDisplayHasListBooksOption() {
-        Map<String, String> menuOptions = new HashMap<String, String>();
-        menuOptions.put("L", "List Books");
+        List<MenuOperation> menuOperations = new ArrayList<MenuOperation>();
+        MenuOperation op = mock(MenuOperation.class);
+        when(op.getDescription()).thenReturn("List Books");
+        menuOperations.add(op);
 
-        console.printMenuOptions(menuOptions);
+        console.printMenuOptions(menuOperations);
         verify(out).println("List Books");
     }
 

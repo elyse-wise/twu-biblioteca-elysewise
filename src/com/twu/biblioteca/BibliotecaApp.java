@@ -11,64 +11,46 @@ public class BibliotecaApp {
 
     private Console console;
     private Library library;
-    private Map<String, String> menuOptions;
+    private List<MenuOperation> menuOperations;
 
 
-    public BibliotecaApp(Console console, Library library, Map<String, String> menuOptions) {
+    public BibliotecaApp(Console console, Library library, List<MenuOperation> menuOperations) {
         this.console = console;
         this.library = library;
-        this.menuOptions = menuOptions;
+        this.menuOperations = menuOperations;
     }
 
     public void run() {
         console.printWelcome();
-        String command = null;
+        MenuOperation op = null;
 
-        while (userHasNotQuit(command)) {
+        while (!userHasQuit(op)) {
 
-            command = getNextUserCommand();
-
-            if (command != null && command.equalsIgnoreCase("L")) {
-                console.printListBooksHeader();
-                console.printBookList(library.availableBooks());
-            } else if (command != null && command.equalsIgnoreCase("C")) {
-                console.printCheckoutBooksHeader();
-                console.printBookList(library.availableBooks());
-                console.promptUserForBookSelection();
-                int selection = Integer.parseInt(console.getUserCommand());
-                if (library.bookIsAvailable(selection)) {
-                    library.checkOutBook(selection);
-                    console.thankUserForCheckingOut();
-                } else {
-                    console.warnInvalidBookSelection();
-                }
-            } else if (command != null && command.equalsIgnoreCase("R")) {
-                console.printReturnBooksHeader();
-                console.printBookList(library.checkedOutBooks());
-                console.promptUserForBookSelection();
-                int selection = Integer.parseInt(console.getUserCommand());
-                if (library.bookIsCheckedOut(selection)) {
-                    library.returnBook(selection);
-                    console.thankUserForReturningBook();
-                } else {
-                    console.warnInvalidBookSelectionForReturn();
-                }
-            } else if (command != null && command.equalsIgnoreCase("Q")) {
-                break;
+            op = findMatchingMenuOperation(getNextUserCommand());
+            if (op != null) {
+                op.execute(library, console);
             } else {
                 console.warnInvalidMenuOption();
             }
         }
     }
 
-    private Boolean userHasNotQuit(String command) {
-        Boolean userHasQuit = (command != null && command.equalsIgnoreCase("Q"));
-        return !userHasQuit;
+    private MenuOperation findMatchingMenuOperation(String command) {
+        for (MenuOperation op : menuOperations) {
+            if (op.isTriggeredBy(command)) {
+                return op;
+            }
+        }
+        return null;
+    }
+
+    private Boolean userHasQuit(MenuOperation op) {
+        return (op instanceof QuitMenuOperation);
     }
 
     private String getNextUserCommand() {
         console.printGap();
-        console.printMenuOptions(menuOptions);
+        console.printMenuOptions(menuOperations);
         console.promptUserForMenuOption();
         return console.getUserCommand();
     }

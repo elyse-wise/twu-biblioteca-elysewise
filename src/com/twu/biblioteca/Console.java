@@ -41,12 +41,12 @@ public class Console {
         out.println(book.getDetailsString());
     }
 
-    public void printMenuOptions(Map<String, String> menuOptions) {
+    public void printMenuOptions(List<MenuOperation> menuOperations) {
         out.println("Menu Options:");
 
-        for (Map.Entry<String, String> menuOption : menuOptions.entrySet()) {
-            out.print("\t " + menuOption.getKey() + " => ");
-            out.println(menuOption.getValue());
+        for (MenuOperation op : menuOperations) {
+            out.print("\t " + op.getTrigger() + " => ");
+            out.println(op.getDescription());
         }
     }
 
