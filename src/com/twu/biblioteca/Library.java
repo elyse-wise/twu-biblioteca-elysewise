@@ -36,6 +36,10 @@ public class Library {
         return checkedOutBooks;
     }
 
+    public List<Movie> availableMovies() {
+        return new ArrayList<Movie>();
+    }
+
     public int numberOfBooksInLibrary() {
         return availableBooks.size();
     }
