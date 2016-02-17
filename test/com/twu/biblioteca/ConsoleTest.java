@@ -96,6 +96,49 @@ public class ConsoleTest {
         verify(testBook, times(1)).getColumnString();
     }
 
+
+    @Test
+    public void testNoMoviesArePrintedWhenMovieListIsEmpty() {
+        console.printMovieList(new ArrayList<Movie>());
+        verify(out, never()).println();
+    }
+
+    @Test
+    public void testOneMovieIsPrintedWhenMovieListHasOneBook() {
+        List<Movie> movies = new ArrayList<Movie>();
+        Movie movie = mock(Movie.class);
+        movies.add(movie);
+
+        console.printMovieList(movies);
+        verify(movie, times(1)).getDetailsString();
+    }
+
+    @Test
+    public void testAllMoviesPrintedWhenMovieListHasMultipleMovies() {
+        List<Movie> movies = new ArrayList<Movie>();
+        Movie testMovie1 = mock(Movie.class);
+        Movie testMovie2 = mock(Movie.class);
+        Movie testMovie3 = mock(Movie.class);
+        movies.add(testMovie1);
+        movies.add(testMovie2);
+        movies.add(testMovie3);
+
+        console.printMovieList(movies);
+        verify(testMovie1, times(1)).getDetailsString();
+        verify(testMovie2, times(1)).getDetailsString();
+        verify(testMovie3, times(1)).getDetailsString();
+    }
+
+    @Test
+    public void testColumnsArePrintedWhenShowingMovieList() {
+        List<Movie> movies= new ArrayList<Movie>();
+        Movie testMovie = mock(Movie.class);
+        movies.add(testMovie);
+
+        console.printMovieList(movies);
+        verify(testMovie, times(1)).getColumnString();
+    }
+
     @Test
     public void testMenuDisplayHasListBooksOption() {
         List<MenuOperation> menuOperations = new ArrayList<MenuOperation>();

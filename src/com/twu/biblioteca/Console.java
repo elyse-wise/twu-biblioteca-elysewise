@@ -40,6 +40,25 @@ public class Console {
         out.println(book.getDetailsString());
     }
 
+    public void printMovieList(List<Movie> movies) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (i == 0) {
+                printMovieColumns(movies.get(0));
+            }
+            printMovieDetails(i, movies.get(i));
+        }
+    }
+
+    public void printMovieColumns(Movie movie) {
+        out.print(String.format("\t%-4s", ""));
+        out.println(movie.getColumnString());
+    }
+
+    public void printMovieDetails(int i, Movie movie) {
+        out.print(String.format("\t%-4s", i + "."));
+        out.println(movie.getDetailsString());
+    }
+
     public void printMenuOptions(List<MenuOperation> menuOperations) {
         out.println("Menu Options:");
 
