@@ -35,6 +35,10 @@ public class Library {
         return availableBooks;
     }
 
+    public List<Book> checkedOutBooks() {
+        return checkedOutBooks;
+    }
+
     public int numberOfBooksInLibrary() {
         return availableBooks.size();
     }
@@ -51,6 +55,9 @@ public class Library {
     }
 
     public void returnBook(int bookIndex) {
-        // TODO
+        if (bookIsCheckedOut(bookIndex)) {
+            Book b = checkedOutBooks.remove(bookIndex);
+            availableBooks.add(b);
+        }
     }
 }

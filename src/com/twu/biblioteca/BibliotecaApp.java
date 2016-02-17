@@ -41,6 +41,14 @@ public class BibliotecaApp {
                 } else {
                     console.warnInvalidBookSelection();
                 }
+            } else if (command != null && command.equalsIgnoreCase("R")) {
+                console.printBookList(library.checkedOutBooks());
+                console.promptUserForBookSelection();
+                int selection = Integer.parseInt(console.getUserCommand());
+                if (library.bookIsCheckedOut(selection)) {
+                    library.returnBook(selection);
+                } else {
+                }
             } else if (command != null && command.equalsIgnoreCase("Q")) {
                 break;
             } else {
