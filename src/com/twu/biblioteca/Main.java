@@ -1,9 +1,6 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -15,7 +12,7 @@ public class Main {
     }
 
     private static Map<String, String> buildMenuOptions() {
-        Map<String, String> menuOptions = new HashMap<String, String>();
+        Map<String, String> menuOptions = new LinkedHashMap<String, String>();
         menuOptions.put("L", "List Books");
         menuOptions.put("C", "Checkout Book");
         menuOptions.put("R", "Return Book");
