@@ -20,7 +20,9 @@ public class LibraryTest {
     @Before
     public void setup() {
         //start with library of 2 available books, 3 checked out books
-        library = new Library(buildListOfMockBooksWithSetSize(2), buildListOfMockBooksWithSetSize(3));
+        library = new Library();
+        library.setAvailableBooks(buildListOfMockBooksWithSetSize(2));
+        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(3));
     }
 
     private List<Book> buildListOfMockBooksWithSetSize(int amountOfBooks) {
@@ -31,6 +33,33 @@ public class LibraryTest {
         return bookList;
     }
 
+    @Test
+    public void testSetAvailableBooksUpdatesNumberOfBooksInLibrary() {
+        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
+        library.setAvailableBooks(mockBookList);
+        assertEquals(76, library.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void testSetAvailableBooksUpdatesAvailableBooksInLibrary() {
+        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
+        library.setAvailableBooks(mockBookList);
+        assertEquals(mockBookList, library.availableBooks());
+    }
+
+    @Test
+    public void testSetCheckedOutBooksUpdatesNumberOfBooksCheckedOut() {
+        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
+        library.setCheckedOutBooks(mockBookList);
+        assertEquals(76, library.numberOfBooksCheckedOut());
+    }
+
+    @Test
+    public void testSetCheckedOutBooksUpdatesCheckedOutBooksInLibrary() {
+        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
+        library.setCheckedOutBooks(mockBookList);
+        assertEquals(mockBookList, library.checkedOutBooks());
+    }
     @Test
     public void testBookZeroIsAvailableWhenBooksAreInLibrary() {
         assertTrue(library.bookIsAvailable(0));
@@ -43,25 +72,25 @@ public class LibraryTest {
 
     @Test
     public void testBookZeroIsNotAvailableWhenNoBooksAreInLibrary() {
-        library = new Library(buildListOfMockBooksWithSetSize(0));
+        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
         assertFalse(library.bookIsAvailable(0));
     }
 
     @Test
     public void testBookZeroIsNotCheckedOutWhenNoBooksAreCheckedOutOfLibrary() {
-        library = new Library(buildListOfMockBooksWithSetSize(0), buildListOfMockBooksWithSetSize(0));
+        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
         assertFalse(library.bookIsCheckedOut(0));
     }
 
     @Test
     public void numberOfBooksInLibraryReturnsZeroForEmptyBookList() {
-        library = new Library(new ArrayList<Book>());
+        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
         assertEquals(0, library.numberOfBooksInLibrary());
     }
 
     @Test
     public void numberOfBooksCheckedOutReturnsZeroForEmptyBookList() {
-        library = new Library(new ArrayList<Book>(), new ArrayList<Book>());
+        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
         assertEquals(0, library.numberOfBooksCheckedOut());
     }
 

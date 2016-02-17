@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Console console = new Console(System.in, System.out);
-        Library library = new Library(buildAvailableBooks(), buildCheckedOutBooks());
+        Library library = buildLibrary();
         BibliotecaApp application = new BibliotecaApp(console, library, buildMenuOperations());
         application.run();
     }
@@ -20,6 +20,13 @@ public class Main {
         menuOperations.add(new ListMoviesMenuOperation("LM", "List Movies"));
         menuOperations.add(new QuitMenuOperation("Q", "Quit"));
         return menuOperations;
+    }
+
+    private static Library buildLibrary() {
+        Library library = new Library();
+        library.setAvailableBooks(buildAvailableBooks());
+        library.setCheckedOutBooks(buildCheckedOutBooks());
+        return library;
     }
 
     private static List<Book> buildAvailableBooks() {

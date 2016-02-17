@@ -11,20 +11,18 @@ public class Library {
     private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
 
-    public Library(List<Book> availableBooks) {
-        this.availableBooks = availableBooks;
+    public Library() {
+        this.availableBooks = new ArrayList<Book>();
         this.checkedOutBooks = new ArrayList<Book>();
+        this.availableMovies = new ArrayList<Movie>();
     }
 
-    public Library(List<Book> availableBooks, List<Book> checkedOutBooks) {
+    public void setAvailableBooks(List<Book> availableBooks) {
         this.availableBooks = availableBooks;
-        this.checkedOutBooks = checkedOutBooks;
     }
 
-    public Library(List<Book> availableBooks, List<Book> checkedOutBooks, List<Movie> availableMovies) {
-        this.availableBooks = availableBooks;
+    public void setCheckedOutBooks(List<Book> checkedOutBooks) {
         this.checkedOutBooks = checkedOutBooks;
-        this.availableMovies = availableMovies;
     }
 
     public Boolean bookIsAvailable(int bookIndex) {
