@@ -20,6 +20,6 @@ public class Book {
     }
 
     public String getDetailsString() {
-        return String.format("%-30s %-30s %-30s", title, author, yearPublished);
+        return String.format("%-30.28s %-30.28s %-30.28s", title, author, yearPublished);
     }
 }
