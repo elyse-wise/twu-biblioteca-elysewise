@@ -33,6 +33,14 @@ public class LibraryTest {
         return bookList;
     }
 
+    private List<Movie> buildListOfMockMoviesWithSetSize(int amountOfMovies) {
+        List<Movie> movieList = new ArrayList<Movie>();
+        for (int i = 0; i < amountOfMovies; i++) {
+            movieList.add(mock(Movie.class));
+        }
+        return movieList;
+    }
+
     @Test
     public void testSetAvailableBooksUpdatesNumberOfBooksInLibrary() {
         List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
@@ -60,6 +68,21 @@ public class LibraryTest {
         library.setCheckedOutBooks(mockBookList);
         assertEquals(mockBookList, library.checkedOutBooks());
     }
+
+    @Test
+    public void testSetAvailableMoviesUpdatesNumberOfMoviesInLibrary() {
+        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
+        library.setAvailableMovies(mockMovieList);
+        assertEquals(76, library.numberOfMoviesInLibrary());
+    }
+
+    @Test
+    public void testSetAvailableMoviesUpdatesAvailableMoviesInLibrary() {
+        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
+        library.setAvailableMovies(mockMovieList);
+        assertEquals(mockMovieList, library.availableMovies());
+    }
+
     @Test
     public void testBookZeroIsAvailableWhenBooksAreInLibrary() {
         assertTrue(library.bookIsAvailable(0));

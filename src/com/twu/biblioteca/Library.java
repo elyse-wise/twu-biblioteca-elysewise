@@ -25,6 +25,10 @@ public class Library {
         this.checkedOutBooks = checkedOutBooks;
     }
 
+    public void setAvailableMovies(List<Movie> availableMovies) {
+        this.availableMovies = availableMovies;
+    }
+
     public Boolean bookIsAvailable(int bookIndex) {
         return (bookIndex >= 0 && bookIndex < availableBooks.size());
     }
@@ -42,7 +46,7 @@ public class Library {
     }
 
     public List<Movie> availableMovies() {
-        return new ArrayList<Movie>();
+        return availableMovies;
     }
 
     public int numberOfBooksInLibrary() {
@@ -51,6 +55,10 @@ public class Library {
 
     public int numberOfBooksCheckedOut() {
         return checkedOutBooks.size();
+    }
+
+    public int numberOfMoviesInLibrary() {
+        return availableMovies.size();
     }
 
     public void checkOutBook(int bookIndex) {
@@ -66,4 +74,5 @@ public class Library {
             availableBooks.add(b);
         }
     }
+
 }
