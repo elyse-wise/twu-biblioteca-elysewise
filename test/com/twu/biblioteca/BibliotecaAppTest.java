@@ -165,7 +165,6 @@ public class BibliotecaAppTest {
         verify(library, never()).checkOutBook(-23);
     }
 
-
     @Test
     public void testValidReturnBookOptionReturnsBook() {
         String commands[] = {"R", "1", "q"};
@@ -174,6 +173,26 @@ public class BibliotecaAppTest {
         application.run();
         verify(console, never()).warnInvalidMenuOption();
         verify(library).returnBook(1);
+    }
+
+
+    @Test
+    public void testValidReturnBookOptionGivesUserThankYouMessage() {
+        String commands[] = {"R", "1", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).warnInvalidMenuOption();
+        verify(console, times(1)).thankUserForReturningBook();
+    }
+
+    @Test
+    public void testInvalidReturnBookOptionWarnsUser() {
+        String commands[] = {"R", "-23", "q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, times(1)).warnInvalidBookSelectionForReturn();
     }
 
     @Test

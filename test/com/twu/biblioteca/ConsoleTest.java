@@ -104,4 +104,16 @@ public class ConsoleTest {
         console.thankUserForCheckingOut();
         verify(out).println("Thank you! Enjoy the book");
     }
+
+    @Test
+    public void testWarnInvalidBookSelectionForReturn() {
+        console.warnInvalidBookSelectionForReturn();
+        verify(out).println("That is not a valid book to return");
+    }
+
+    @Test
+    public void testThankUserForReturningBook() {
+        console.thankUserForReturningBook();
+        verify(out).println("Thank you for returning the book");
+    }
 }

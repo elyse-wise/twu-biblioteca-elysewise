@@ -87,4 +87,11 @@ public class Console {
         out.println();
     }
 
+    public void thankUserForReturningBook() {
+        // TODO
+    }
+
+    public void warnInvalidBookSelectionForReturn() {
+        // TODO
+    }
 }
