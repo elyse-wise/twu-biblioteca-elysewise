@@ -26,7 +26,6 @@ public class ConsoleTest {
         console = new Console(in, out);
     }
 
-
     @Test
     public void testWelcomeMessageIsDisplayed() {
         console.printWelcome();
@@ -34,15 +33,31 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testNoBooksArePrintedWhenLibraryIsEmpty() {
-        List<Book> books = new ArrayList<Book>();
+    public void testHeaderIsDisplayedOnListBooks() {
+        console.printListBooksHeader();
+        verify(out).println("Books Currently In Library:");
+    }
 
-        console.printBookList(books);
+    @Test
+    public void testHeaderIsDisplayedOnCheckoutBooks() {
+        console.printCheckoutBooksHeader();
+        verify(out).println("Books Available For Checkout:");
+    }
+
+    @Test
+    public void testHeaderIsDisplayedOnReturnBooks() {
+        console.printReturnBooksHeader();
+        verify(out).println("Books Available For Return:");
+    }
+
+    @Test
+    public void testNoBooksArePrintedWhenBookListIsEmpty() {
+        console.printBookList(new ArrayList<Book>());
         verify(out, never()).println();
     }
 
     @Test
-    public void testOneBookIsPrintedWhenOneBookIsInLibrary() {
+    public void testOneBookIsPrintedWhenBookListHasOneBook() {
         List<Book> books = new ArrayList<Book>();
         Book testBook = mock(Book.class);
         books.add(testBook);
@@ -52,7 +67,7 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testAllBooksPrintedWhenMultipleBooksAreInLibrary() {
+    public void testAllBooksPrintedWhenBookListHasMultipleBooks() {
         List<Book> books = new ArrayList<Book>();
         Book testBook1 = mock(Book.class);
         Book testBook2 = mock(Book.class);
@@ -80,8 +95,7 @@ public class ConsoleTest {
     @Test
     public void testMenuDisplayHasListBooksOption() {
         Map<String, String> menuOptions = new HashMap<String, String>();
-
-        menuOptions.put("l", "List Books");
+        menuOptions.put("L", "List Books");
 
         console.printMenuOptions(menuOptions);
         verify(out).println("List Books");
@@ -94,7 +108,7 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testWarnInvalidBookSelection() {
+    public void testWarnInvalidBookSelectionForCheckout() {
         console.warnInvalidBookSelection();
         verify(out).println("That book is not available");
     }

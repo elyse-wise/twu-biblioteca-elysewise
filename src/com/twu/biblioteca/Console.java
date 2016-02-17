@@ -22,8 +22,6 @@ public class Console {
     }
 
     public void printBookList(List<Book> books) {
-        out.println("Currently Available Books:");
-
         for (int i = 0; i < books.size(); i++) {
             if (i == 0) {
                 printBookColumns(books.get(0));
@@ -93,5 +91,17 @@ public class Console {
 
     public void warnInvalidBookSelectionForReturn() {
         out.println("That is not a valid book to return");
+    }
+
+    public void printListBooksHeader() {
+        out.println("Books Currently In Library:");
+    }
+
+    public void printCheckoutBooksHeader() {
+        out.println("Books Available For Checkout:");
+    }
+
+    public void printReturnBooksHeader() {
+        out.println("Books Available For Return:");
     }
 }
