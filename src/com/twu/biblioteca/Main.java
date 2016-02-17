@@ -9,7 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         Console console = new Console(System.in, System.out);
-        BibliotecaApp application = new BibliotecaApp(console, buildBooks(), buildMenuOptions());
+        Library library = new Library(buildBooks());
+        BibliotecaApp application = new BibliotecaApp(console, library, buildMenuOptions());
         application.run();
     }
 

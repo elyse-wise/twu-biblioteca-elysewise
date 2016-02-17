@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,18 +10,14 @@ import java.util.Map;
 public class BibliotecaApp {
 
     private Console console;
-    private List<Book> books;
+    private Library library;
     private Map<String, String> menuOptions;
 
 
-    public BibliotecaApp(Console console, List<Book> books, Map<String, String> menuOptions) {
+    public BibliotecaApp(Console console, Library library, Map<String, String> menuOptions) {
         this.console = console;
-        this.books = books;
+        this.library = library;
         this.menuOptions = menuOptions;
-    }
-
-    public int numberOfBooksInLibrary() {
-        return books.size();
     }
 
     public void run() {
@@ -33,13 +30,13 @@ public class BibliotecaApp {
             String command = console.getUserCommand();
 
             if (command != null && command.equalsIgnoreCase("L")) {
-                console.printBookList(books);
+                console.printBookList(library.availableBooks());
             } else if (command != null && command.equalsIgnoreCase("C")) {
-                console.printBookList(books);
+                console.printBookList(library.availableBooks());
                 console.promptUserForBookSelection();
                 int selection = Integer.parseInt(console.getUserCommand());
-                if (selection > 0 && selection < books.size()) {
-                    books.remove(selection);
+                if (library.bookIsAvailable(selection)) {
+                    library.checkOutBook(selection);
                     console.thankUserForCheckingOut();
                 } else {
                     console.warnInvalidBookSelection();

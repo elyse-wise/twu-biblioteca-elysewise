@@ -17,16 +17,16 @@ public class BibliotecaAppTest {
 
     private BibliotecaApp application;
     private Console console;
-    private List<Book> books;
+    private Library library;
     private Map<String, String> menuOptions;
 
     @Before
     public void setup() {
         console = mock(Console.class);
-        books = new ArrayList<Book>();
+        Library library = mock(Library.class);
         menuOptions = new HashMap<String, String>();
         menuOptions.put("l", "List Books");
-        application = new BibliotecaApp(console, books, menuOptions);
+        application = new BibliotecaApp(console, library, menuOptions);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console).printBookList(books);
+        verify(console).printBookList(library.availableBooks());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console, never()).printBookList(books);
+        verify(console, never()).printBookList(library.availableBooks());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console, times(3)).printBookList(books);
+        verify(console, times(3)).printBookList(library.availableBooks());
         verify(console, times(4)).promptUserForMenuOption();
     }
 
@@ -100,49 +100,36 @@ public class BibliotecaAppTest {
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        verify(console, times(3)).printBookList(books);
-    }
-
-    @Test
-    public void numberOfBooksInLibraryReturnsZeroForEmptyBookList() {
-        assertEquals(0, application.numberOfBooksInLibrary());
-    }
-
-    @Test
-    public void numberOfBooksInLibraryReturnsThreeForBookListOfThree() {
-
-        //add 3 books to the library
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-
-        application = new BibliotecaApp(console, books, menuOptions);
-        assertEquals(3, application.numberOfBooksInLibrary());
+        verify(console, times(3)).printBookList(library.availableBooks());
     }
 
     @Test
     public void testValidCheckoutBookOptionRemovesBookFromList() {
 
         //add 2 books to the library
+        List<Book> books = new ArrayList<Book>();
         books.add(mock(Book.class));
         books.add(mock(Book.class));
-        application = new BibliotecaApp(console, books, menuOptions);
+        library = new Library(books);
+        application = new BibliotecaApp(console, library, menuOptions);
 
         String commands[] = {"C", "1", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(1, application.numberOfBooksInLibrary());
+        assertEquals(1, library.numberOfBooksInLibrary());
     }
 
     @Test
     public void testValidCheckoutBookOptionGivesUserThankYouMessage() {
 
         //add 2 books to the library
+        List<Book> books = new ArrayList<Book>();
         books.add(mock(Book.class));
         books.add(mock(Book.class));
-        application = new BibliotecaApp(console, books, menuOptions);
+        library = new Library(books);
+        application = new BibliotecaApp(console, library, menuOptions);
 
         String commands[] = {"C", "1", "q"};
         setUserInput(commands);
@@ -165,32 +152,36 @@ public class BibliotecaAppTest {
     public void testInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
 
         //add 2 books to the library
+        List<Book> books = new ArrayList<Book>();
         books.add(mock(Book.class));
         books.add(mock(Book.class));
-        application = new BibliotecaApp(console, books, menuOptions);
+        library = new Library(books);
+        application = new BibliotecaApp(console, library, menuOptions);
 
         String commands[] = {"C", "193738", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(2, application.numberOfBooksInLibrary());
+        assertEquals(2, library.numberOfBooksInLibrary());
     }
 
     @Test
     public void testNegativeInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
 
         //add 2 books to the library
+        List<Book> books = new ArrayList<Book>();
         books.add(mock(Book.class));
         books.add(mock(Book.class));
-        application = new BibliotecaApp(console, books, menuOptions);
+        library = new Library(books);
+        application = new BibliotecaApp(console, library, menuOptions);
 
         String commands[] = {"C", "-23", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(2, application.numberOfBooksInLibrary());
+        assertEquals(2, library.numberOfBooksInLibrary());
     }
 
     private void setUserInput(String inputs[]) {
