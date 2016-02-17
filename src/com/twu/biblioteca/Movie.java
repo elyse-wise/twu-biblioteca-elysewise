@@ -17,6 +17,11 @@ public class Movie {
         this.rating = rating;
     }
 
+    public String getColumnString() {
+        return String.format("%-30s %-30s %-30s %-30s", "Name", "Year", "Director", "Rating");
+    }
+
+
     public String getDetailsString() {
         return String.format("%-30.28s %-30.28s %-30.28s %-30.28s", name, year, director, rating);
     }

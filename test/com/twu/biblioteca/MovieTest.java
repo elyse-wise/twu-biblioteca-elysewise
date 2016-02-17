@@ -40,4 +40,13 @@ public class MovieTest {
         String details = movie.getDetailsString();
         assertTrue(details.contains("MyRating"));
     }
+
+    @Test
+    public void getColumnsStringReturnsExpectedColumns() {
+        String details = movie.getColumnString();
+        assertTrue(details.contains("Name"));
+        assertTrue(details.contains("Year"));
+        assertTrue(details.contains("Director"));
+        assertTrue(details.contains("Rating"));
+    }
 }
