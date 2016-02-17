@@ -26,6 +26,7 @@ public class Main {
         Library library = new Library();
         library.setAvailableBooks(buildAvailableBooks());
         library.setCheckedOutBooks(buildCheckedOutBooks());
+        library.setAvailableMovies(buildAvailableMovies());
         return library;
     }
 
@@ -46,5 +47,13 @@ public class Main {
         books.add(new Book("The Lion, The Witch and The Wardrobe", "C.S. Lewis", "1950"));
         books.add(new Book("Charlotte's Web", "E.B. White", "1952"));
         return books;
+    }
+
+    private static List<Movie> buildAvailableMovies() {
+        List<Movie> movies = new ArrayList<Movie>();
+        movies.add(new Movie("MovieA", "1859", "DirectorA", "1"));
+        movies.add(new Movie("MovieB", "1983", "DirectorB", "2"));
+        movies.add(new Movie("MovieC", "2002", "DirectorC", "3"));
+        return movies;
     }
 }
