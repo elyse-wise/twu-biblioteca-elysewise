@@ -23,10 +23,19 @@ public class BibliotecaAppTest {
     @Before
     public void setup() {
         console = mock(Console.class);
-        Library library = mock(Library.class);
+        library = buildMockLibraryWithSetBookAmount(3);
         menuOptions = new HashMap<String, String>();
         menuOptions.put("l", "List Books");
         application = new BibliotecaApp(console, library, menuOptions);
+    }
+
+    private Library buildMockLibraryWithSetBookAmount(int amountOfBooks) {
+        library = mock(Library.class);
+        when(library.numberOfBooksInLibrary()).thenReturn(amountOfBooks);
+        for (int i = 0; i < amountOfBooks; i++) {
+            when(library.bookIsAvailable(i)).thenReturn(true);
+        }
+        return library;
     }
 
     @Test
@@ -105,32 +114,16 @@ public class BibliotecaAppTest {
 
     @Test
     public void testValidCheckoutBookOptionRemovesBookFromList() {
-
-        //add 2 books to the library
-        List<Book> books = new ArrayList<Book>();
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        library = new Library(books);
-        application = new BibliotecaApp(console, library, menuOptions);
-
         String commands[] = {"C", "1", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(1, library.numberOfBooksInLibrary());
+        verify(library).checkOutBook(1);
     }
 
     @Test
     public void testValidCheckoutBookOptionGivesUserThankYouMessage() {
-
-        //add 2 books to the library
-        List<Book> books = new ArrayList<Book>();
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        library = new Library(books);
-        application = new BibliotecaApp(console, library, menuOptions);
-
         String commands[] = {"C", "1", "q"};
         setUserInput(commands);
 
@@ -150,38 +143,22 @@ public class BibliotecaAppTest {
 
     @Test
     public void testInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
-
-        //add 2 books to the library
-        List<Book> books = new ArrayList<Book>();
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        library = new Library(books);
-        application = new BibliotecaApp(console, library, menuOptions);
-
         String commands[] = {"C", "193738", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(2, library.numberOfBooksInLibrary());
+        verify(library, never()).checkOutBook(193738);
     }
 
     @Test
     public void testNegativeInvalidCheckoutBookOptionDoesNotRemoveBookFromList() {
-
-        //add 2 books to the library
-        List<Book> books = new ArrayList<Book>();
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        library = new Library(books);
-        application = new BibliotecaApp(console, library, menuOptions);
-
         String commands[] = {"C", "-23", "q"};
         setUserInput(commands);
 
         application.run();
         verify(console, never()).warnInvalidMenuOption();
-        assertEquals(2, library.numberOfBooksInLibrary());
+        verify(library, never()).checkOutBook(-23);
     }
 
     private void setUserInput(String inputs[]) {
