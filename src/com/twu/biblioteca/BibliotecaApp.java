@@ -22,12 +22,11 @@ public class BibliotecaApp {
 
     public void run() {
         console.printWelcome();
+        String command = null;
 
-        while (true) {
-            console.printGap();
-            console.printMenuOptions(menuOptions);
-            console.promptUserForMenuOption();
-            String command = console.getUserCommand();
+        while (userHasNotQuit(command)) {
+
+            command = getNextUserCommand();
 
             if (command != null && command.equalsIgnoreCase("L")) {
                 console.printListBooksHeader();
@@ -62,4 +61,15 @@ public class BibliotecaApp {
         }
     }
 
+    private Boolean userHasNotQuit(String command) {
+        Boolean userHasQuit = (command != null && command.equalsIgnoreCase("Q"));
+        return !userHasQuit;
+    }
+
+    private String getNextUserCommand() {
+        console.printGap();
+        console.printMenuOptions(menuOptions);
+        console.promptUserForMenuOption();
+        return console.getUserCommand();
+    }
 }
