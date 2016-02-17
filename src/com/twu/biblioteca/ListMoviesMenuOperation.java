@@ -11,6 +11,7 @@ public class ListMoviesMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
+        console.printListMoviesHeader();
         console.printMovieList(library.availableMovies());
     }
 }

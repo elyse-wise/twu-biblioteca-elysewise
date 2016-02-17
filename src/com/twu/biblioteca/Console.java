@@ -115,6 +115,10 @@ public class Console {
         out.println("Books Currently In Library:");
     }
 
+    public void printListMoviesHeader() {
+        out.println("Movies Currently In Library:");
+    }
+
     public void printCheckoutBooksHeader() {
         out.println("Books Available For Checkout:");
     }
