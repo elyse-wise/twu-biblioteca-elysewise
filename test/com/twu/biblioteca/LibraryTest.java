@@ -8,7 +8,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Elyse on 17/02/2016.

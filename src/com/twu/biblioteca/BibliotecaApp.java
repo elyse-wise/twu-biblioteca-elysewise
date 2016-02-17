@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Elyse on 16/02/2016.
@@ -25,13 +23,16 @@ public class BibliotecaApp {
         MenuOperation op = null;
 
         while (!userHasQuit(op)) {
-
             op = findMatchingMenuOperation(getNextUserCommand());
-            if (op != null) {
-                op.execute(library, console);
-            } else {
-                console.warnInvalidMenuOption();
-            }
+            handleMenuOperation(op);
+        }
+    }
+
+    private void handleMenuOperation(MenuOperation op) {
+        if (op != null) {
+            op.execute(library, console);
+        } else {
+            console.warnInvalidMenuOption();
         }
     }
 

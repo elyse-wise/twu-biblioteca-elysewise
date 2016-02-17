@@ -1,8 +1,5 @@
 package com.twu.biblioteca;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
