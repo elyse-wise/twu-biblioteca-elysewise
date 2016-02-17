@@ -30,8 +30,10 @@ public class BibliotecaApp {
             String command = console.getUserCommand();
 
             if (command != null && command.equalsIgnoreCase("L")) {
+                console.printListBooksHeader();
                 console.printBookList(library.availableBooks());
             } else if (command != null && command.equalsIgnoreCase("C")) {
+                console.printCheckoutBooksHeader();
                 console.printBookList(library.availableBooks());
                 console.promptUserForBookSelection();
                 int selection = Integer.parseInt(console.getUserCommand());
@@ -42,6 +44,7 @@ public class BibliotecaApp {
                     console.warnInvalidBookSelection();
                 }
             } else if (command != null && command.equalsIgnoreCase("R")) {
+                console.printReturnBooksHeader();
                 console.printBookList(library.checkedOutBooks());
                 console.promptUserForBookSelection();
                 int selection = Integer.parseInt(console.getUserCommand());
