@@ -18,8 +18,17 @@ public class Library {
         this.checkedOutBooks = new ArrayList<Book>();
     }
 
+    public Library(List<Book> availableBooks, List<Book> checkedOutBooks) {
+        this.availableBooks = availableBooks;
+        this.checkedOutBooks = checkedOutBooks;
+    }
+
     public Boolean bookIsAvailable(int bookIndex) {
         return (bookIndex >= 0 && bookIndex < availableBooks.size());
+    }
+
+    public Boolean bookIsCheckedOut(int bookIndex) {
+        return (bookIndex >= 0 && bookIndex < checkedOutBooks.size());
     }
 
     public List<Book> availableBooks() {
@@ -30,9 +39,14 @@ public class Library {
         return availableBooks.size();
     }
 
+    public int numberOfBooksCheckedOut() {
+        return checkedOutBooks.size();
+    }
+
     public void checkOutBook(int bookIndex) {
         if (bookIsAvailable(bookIndex)) {
-            availableBooks.remove(bookIndex);
+            Book b = availableBooks.remove(bookIndex);
+            checkedOutBooks.add(b);
         }
     }
 
