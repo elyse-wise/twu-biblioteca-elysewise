@@ -10,6 +10,6 @@ public class QuitMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printExitMessage();
+        console.printMessage("Exiting Biblioteca...");
     }
 }

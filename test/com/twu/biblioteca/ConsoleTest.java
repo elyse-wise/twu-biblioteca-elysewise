@@ -37,24 +37,6 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testExitMessageIsDisplayed() {
-        console.printExitMessage();
-        verify(out).println("Exiting Biblioteca...");
-    }
-
-    @Test
-    public void testHeaderIsDisplayedOnCheckoutItems() {
-        console.printCheckoutItemsHeader();
-        verify(out).println("Items Available For Checkout:");
-    }
-
-    @Test
-    public void testHeaderIsDisplayedOnReturnBooks() {
-        console.printReturnBooksHeader();
-        verify(out).println("Items Available For Return:");
-    }
-
-    @Test
     public void testNoItemsArePrintedWhenItemListIsEmpty() {
         console.printLibraryItemList(new ArrayList<LibraryItem>());
         verify(out, never()).println();
@@ -113,27 +95,4 @@ public class ConsoleTest {
         verify(out).println("Select a valid option!");
     }
 
-    @Test
-    public void testWarnInvalidBookSelectionForCheckout() {
-        console.warnInvalidBookSelectionForCheckout();
-        verify(out).println("That book is not available");
-    }
-
-    @Test
-    public void testThankUserForCheckingOut() {
-        console.thankUserForCheckingOutBook();
-        verify(out).println("Thank you! Enjoy the book");
-    }
-
-    @Test
-    public void testWarnInvalidBookSelectionForReturn() {
-        console.warnInvalidBookSelectionForReturn();
-        verify(out).println("That is not a valid book to return");
-    }
-
-    @Test
-    public void testThankUserForReturningBook() {
-        console.thankUserForReturningBook();
-        verify(out).println("Thank you for returning the book");
-    }
 }

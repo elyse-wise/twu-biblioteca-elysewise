@@ -54,7 +54,7 @@ public class ReturnBookMenuOperationTest {
     @Test
     public void testReturnBooksHeaderPrintedOnExecute() {
         returnBookMenuOperation.execute(library, console);
-        verify(console).printReturnBooksHeader();
+        verify(console).printMessage("Books available for return:");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ReturnBookMenuOperationTest {
     @Test
     public void testUserPromptedForBookSelectionOnExecute() {
         returnBookMenuOperation.execute(library, console);
-        verify(console).promptUserForItemSelection();
+        verify(console).printMessage("> Enter book number: ");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ReturnBookMenuOperationTest {
 
         returnBookMenuOperation.execute(library, console);
         verify(console, never()).warnInvalidMenuOption();
-        verify(console, times(1)).thankUserForReturningBook();
+        verify(console, times(1)).printMessage("Thank you for returning the book");
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ReturnBookMenuOperationTest {
         setUserInput(commands);
 
         returnBookMenuOperation.execute(library, console);
-        verify(console, times(1)).warnInvalidBookSelectionForReturn();
+        verify(console, times(1)).printMessage("That is not a valid book to return");
     }
 
     @Test
@@ -104,7 +104,6 @@ public class ReturnBookMenuOperationTest {
         setUserInput(commands);
 
         returnBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).returnBook(193738);
     }
 
@@ -114,7 +113,6 @@ public class ReturnBookMenuOperationTest {
         setUserInput(commands);
 
         returnBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).returnBook(-23);
     }
 

@@ -74,38 +74,6 @@ public class Console {
         out.println("Select a valid option!");
     }
 
-    public void promptUserForItemSelection() {
-        out.print("> Enter Item Number: ");
-    }
-
-    public void printCheckoutItemsHeader() {
-        out.println("Items Available For Checkout:");
-    }
-
-    public void thankUserForCheckingOutBook() {
-        out.println("Thank you! Enjoy the book");
-    }
-
-    public void warnInvalidBookSelectionForCheckout() {
-        out.println("That book is not available");
-    }
-
-    public void printReturnBooksHeader() {
-        out.println("Items Available For Return:");
-    }
-
-    public void thankUserForReturningBook() {
-        out.println("Thank you for returning the book");
-    }
-
-    public void warnInvalidBookSelectionForReturn() {
-        out.println("That is not a valid book to return");
-    }
-
-    public void printExitMessage() {
-        out.println("Exiting Biblioteca...");
-    }
-
     public void printMessage(String message) {
         out.println(message);
     }

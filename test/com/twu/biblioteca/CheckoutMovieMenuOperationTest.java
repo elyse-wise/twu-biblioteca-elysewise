@@ -48,7 +48,7 @@ public class CheckoutMovieMenuOperationTest {
     @Test
     public void testCheckoutMoviesHeaderPrintedOnExecute() {
         checkoutMovieMenuOperation.execute(library, console);
-        verify(console).printCheckoutItemsHeader();
+        verify(console).printMessage("Movies available for checkout:");
     }
 
     @Test
@@ -60,7 +60,7 @@ public class CheckoutMovieMenuOperationTest {
     @Test
     public void testUserPromptedForMovieSelectionOnExecute() {
         checkoutMovieMenuOperation.execute(library, console);
-        verify(console).promptUserForItemSelection();
+        verify(console).printMessage("> Enter movie number: ");
     }
 
     @Test

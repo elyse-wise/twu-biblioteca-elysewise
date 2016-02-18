@@ -10,15 +10,15 @@ public class ReturnBookMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printReturnBooksHeader();
+        console.printMessage("Books available for return:");
         console.printLibraryItemList(library.checkedOutBooks());
-        console.promptUserForItemSelection();
+        console.printMessage("> Enter book number: ");
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.bookIsCheckedOut(selection)) {
             library.returnBook(selection);
-            console.thankUserForReturningBook();
+            console.printMessage("Thank you for returning the book");
         } else {
-            console.warnInvalidBookSelectionForReturn();
+            console.printMessage("That is not a valid book to return");
         }
     }
 

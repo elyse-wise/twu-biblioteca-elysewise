@@ -36,6 +36,6 @@ public class QuitMenuOperationTest {
     @Test
     public void testExitMessagePrintedOnExecute() {
         quitMenuOperation.execute(library, console);
-        verify(console).printExitMessage();
+        verify(console).printMessage("Exiting Biblioteca...");
     }
 }

@@ -13,7 +13,6 @@ public class CheckoutBookMenuOperation extends MenuOperation {
         console.printMessage("Books available for checkout:");
         console.printLibraryItemList(library.availableBooks());
         console.printMessage("> Enter book number: ");
-        console.promptUserForItemSelection();
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.bookIsAvailable(selection)) {
             library.checkOutBook(selection);
