@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -232,6 +234,35 @@ public class LibraryTest {
     public void testInvalidCheckoutMovieOptionDoesNotRemoveMovieFromList() {
         library.checkOutMovie(54398);
         assertEquals(5, library.numberOfMoviesInLibrary());
+    }
+
+    @Test
+    public void testValidLoginWhenLibraryNumberAndPasswordMatch() {
+        Map<String,String> userCredentials = new HashMap<String, String>();
+        userCredentials.put("123-4567", "myPassword");
+        library.setUserCredentials(userCredentials);
+
+        assertTrue(library.validUserLogin("123-4567", "myPassword"));
+    }
+
+
+    @Test
+    public void testInValidLoginWhenLibraryNumberMatchesAndPasswordDoesNotMatch() {
+        Map<String,String> userCredentials = new HashMap<String, String>();
+        userCredentials.put("123-4567", "myPassword");
+        library.setUserCredentials(userCredentials);
+
+        assertFalse(library.validUserLogin("123-4567", "&*^%&*^%*&*"));
+    }
+
+
+    @Test
+    public void testInValidLoginWhenLibraryNumberDoesNotMatchAndPasswordDoes() {
+        Map<String,String> userCredentials = new HashMap<String, String>();
+        userCredentials.put("123-4567", "myPassword");
+        library.setUserCredentials(userCredentials);
+
+        assertFalse(library.validUserLogin("123-4588", "myPassword"));
     }
 
 }

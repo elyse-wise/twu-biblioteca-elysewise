@@ -1,7 +1,9 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Elyse on 17/02/2016.
@@ -10,12 +12,14 @@ public class Library {
     private List<Book> availableBooks;
     private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
+    private Map<String, String> userCredentials;
     private Boolean userLoggedIn = false;
 
     public Library() {
         this.availableBooks = new ArrayList<Book>();
         this.checkedOutBooks = new ArrayList<Book>();
         this.availableMovies = new ArrayList<Movie>();
+        this.userCredentials = new HashMap<String, String>();
     }
 
     public void setUserLoggedIn(Boolean loginState) {
@@ -36,6 +40,10 @@ public class Library {
 
     public void setAvailableMovies(List<Movie> availableMovies) {
         this.availableMovies = availableMovies;
+    }
+
+    public void setUserCredentials(Map<String, String> userCredentials) {
+        this.userCredentials = userCredentials;
     }
 
     public Boolean bookIsAvailable(int bookIndex) {
@@ -92,5 +100,10 @@ public class Library {
         if (movieIsAvailable(movieIndex)) {
             Movie m = availableMovies.remove(movieIndex);
         }
+    }
+
+    public Boolean validUserLogin(String libraryNumber, String password) {
+        String storedPassword = userCredentials.get(libraryNumber);
+        return (storedPassword != null && storedPassword.equals(password));
     }
 }
