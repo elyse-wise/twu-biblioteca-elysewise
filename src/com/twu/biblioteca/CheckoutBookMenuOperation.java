@@ -10,15 +10,16 @@ public class CheckoutBookMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printCheckoutItemsHeader();
+        console.printMessage("Books available for checkout:");
         console.printLibraryItemList(library.availableBooks());
+        console.printMessage("> Enter book number: ");
         console.promptUserForItemSelection();
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.bookIsAvailable(selection)) {
             library.checkOutBook(selection);
-            console.thankUserForCheckingOutBook();
+            console.printMessage("Thank you! Enjoy the book");
         } else {
-            console.warnInvalidBookSelectionForCheckout();
+            console.printMessage("That book is not available");
         }
     }
 
@@ -30,3 +31,4 @@ public class CheckoutBookMenuOperation extends MenuOperation {
         }
     }
 }
+

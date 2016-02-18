@@ -54,7 +54,7 @@ public class CheckoutBookMenuOperationTest {
     @Test
     public void testCheckoutBooksHeaderPrintedOnExecute() {
         checkoutBookMenuOperation.execute(library, console);
-        verify(console).printCheckoutItemsHeader();
+        verify(console).printMessage("Books available for checkout:");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CheckoutBookMenuOperationTest {
     @Test
     public void testUserPromptedForBookSelectionOnExecute() {
         checkoutBookMenuOperation.execute(library, console);
-        verify(console).promptUserForItemSelection();
+        verify(console).printMessage("> Enter book number: ");
     }
 
 
@@ -76,7 +76,6 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
         verify(library).checkOutBook(1);
     }
 
@@ -86,8 +85,7 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
-        verify(console, times(1)).thankUserForCheckingOutBook();
+        verify(console).printMessage("Thank you! Enjoy the book");
     }
 
     @Test
@@ -96,7 +94,7 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, times(1)).warnInvalidBookSelectionForCheckout();
+        verify(console).printMessage("That book is not available");
     }
 
     @Test
@@ -105,7 +103,6 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).checkOutBook(193738);
     }
 
@@ -115,7 +112,6 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).checkOutBook(-23);
     }
 
