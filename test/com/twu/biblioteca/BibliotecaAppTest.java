@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.sun.glass.ui.Menu;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
@@ -26,31 +27,36 @@ public class BibliotecaAppTest {
         allMenuOptions = new ArrayList<MenuOperation>();
         menuOptionsWithNoLoginRequired = new ArrayList<MenuOperation>();
 
+        addMockListBooksMenuOperation();
+        addMockQuitMenuOperation();
+        addMockMenuOperationWithLoginRequired(false);
+        addMockMenuOperationWithLoginRequired(true);
+
+        application = new BibliotecaApp(console, library, allMenuOptions);
+    }
+
+    public void addMockListBooksMenuOperation() {
         MenuOperation op = mock(ListBooksMenuOperation.class);
         when(op.isTriggeredBy("l")).thenReturn(true);
         when(op.isTriggeredBy("L")).thenReturn(true);
         allMenuOptions.add(op);
         menuOptionsWithNoLoginRequired.add(op);
+    }
 
-        op = mock(QuitMenuOperation.class);
+    public void addMockQuitMenuOperation() {
+        MenuOperation op = mock(QuitMenuOperation.class);
         when(op.isTriggeredBy("q")).thenReturn(true);
         when(op.isTriggeredBy("Q")).thenReturn(true);
         allMenuOptions.add(op);
         menuOptionsWithNoLoginRequired.add(op);
-
-
-        op = mock(MenuOperation.class);
-        when(op.needsLogin()).thenReturn(false);
-        allMenuOptions.add(op);
-        menuOptionsWithNoLoginRequired.add(op);
-
-        op = mock(MenuOperation.class);
-        when(op.needsLogin()).thenReturn(true);
-        allMenuOptions.add(op);
-
-        application = new BibliotecaApp(console, library, allMenuOptions);
     }
 
+    public void addMockMenuOperationWithLoginRequired(Boolean loginRequired) {
+        MenuOperation op = mock(MenuOperation.class);
+        when(op.needsLogin()).thenReturn(loginRequired);
+        allMenuOptions.add(op);
+        if (!loginRequired) menuOptionsWithNoLoginRequired.add(op);
+    }
 
     private Library buildMockLibraryWithSetBookAmounts(int numberOfBooksAvailable, int numberOfBooksCheckedOut) {
         library = mock(Library.class);
