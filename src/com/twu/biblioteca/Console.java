@@ -130,4 +130,12 @@ public class Console {
     public void printExitMessage() {
         out.println("Exiting Biblioteca...");
     }
+
+    public void promptUserForMovieSelection() {
+        out.print("> Enter Movie Code: ");
+    }
+
+    public void printCheckoutMoviesHeader() {
+        out.println("Movies Available For Checkout:");
+    }
 }
