@@ -52,7 +52,7 @@ public class Main {
 
     private static List<Movie> buildAvailableMovies() {
         List<Movie> movies = new ArrayList<Movie>();
-        movies.add(new Movie("MovieA", "1859", "DirectorA", "1"));
+        movies.add(new Movie("MovieA", "1859", "DirectorA", ""));
         movies.add(new Movie("MovieB", "1983", "DirectorB", "2"));
         movies.add(new Movie("MovieC", "2002", "DirectorC", "3"));
         return movies;

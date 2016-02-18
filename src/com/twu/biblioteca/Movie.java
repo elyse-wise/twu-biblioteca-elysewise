@@ -14,7 +14,19 @@ public class Movie implements LibraryItem {
         this.name = name;
         this.year = year;
         this.director = director;
-        this.rating = rating;
+        this.rating = parseMovieRating(rating);
+    }
+
+    //movies have a rating 1-10 or unrated
+    private String parseMovieRating(String string) {
+        try {
+            Integer intRating = Integer.parseInt(string);
+            if (intRating > 0 && intRating <= 10) {
+                return string;
+            }
+        } catch (NumberFormatException e) {
+        }
+        return "unrated";
     }
 
     public String getColumnString() {

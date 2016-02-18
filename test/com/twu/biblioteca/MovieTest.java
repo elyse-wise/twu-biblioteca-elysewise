@@ -14,7 +14,7 @@ public class MovieTest {
 
     @Before
     public void setup() {
-        movie = new Movie("MyName", "MyYear", "MyDirector", "MyRating");
+        movie = new Movie("MyName", "MyYear", "MyDirector", "10");
     }
 
     @Test
@@ -38,7 +38,7 @@ public class MovieTest {
     @Test
     public void testGetDetailsStringIncludesRating() {
         String details = movie.getDetailsString();
-        assertTrue(details.contains("MyRating"));
+        assertTrue(details.contains("10"));
     }
 
     @Test
@@ -48,5 +48,32 @@ public class MovieTest {
         assertTrue(details.contains("Year"));
         assertTrue(details.contains("Director"));
         assertTrue(details.contains("Rating"));
+    }
+
+    @Test
+    public void testMovieAcceptsRatingBetween1and10() {
+        for (int i=1; i <= 10; i++) {
+            String rating = Integer.toString(i);
+            Movie movie = new Movie("a", "b", "c", rating);
+            assertTrue(movie.getDetailsString().contains(rating));
+        }
+    }
+
+    @Test
+    public void testMovieSetsRatingAsUnratedForRatingsBelow1() {
+        Movie movie = new Movie("a", "b", "c", "0");
+        assertTrue(movie.getDetailsString().contains("unrated"));
+    }
+    
+    @Test
+    public void testMovieSetsRatingAsUnratedForRatingsAbove10() {
+        Movie movie = new Movie("a", "b", "c", "11");
+        assertTrue(movie.getDetailsString().contains("unrated"));
+    }
+
+    @Test
+    public void testMovieSetsRatingAsUnratedForRatingsThatAreNotNumbers() {
+            Movie movie = new Movie("a", "b", "c", "((%*^&%*&^%*&^%*^&*&*");
+            assertTrue(movie.getDetailsString().contains("unrated"));
     }
 }
