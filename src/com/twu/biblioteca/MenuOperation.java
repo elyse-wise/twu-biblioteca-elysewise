@@ -13,16 +13,20 @@ public abstract class MenuOperation {
         this.description = description;
     }
 
-    String getTrigger() {
+    public String getTrigger() {
         return trigger;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    Boolean isTriggeredBy(String s) {
+    public Boolean isTriggeredBy(String s) {
         return s.equalsIgnoreCase(trigger);
+    }
+
+    public Boolean needsLogin() {
+        return false;
     }
 
     abstract void execute(Library library, Console console);

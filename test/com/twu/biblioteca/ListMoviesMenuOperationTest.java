@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -37,6 +38,11 @@ public class ListMoviesMenuOperationTest {
     public void testListMoviesHeaderPrintedOnExecute() {
         listMoviesMenuOperation.execute(library, console);
         verify(console).printMessage("Movies Currently In Library:");
+    }
+
+    @Test
+    public void testUserDoesNotNeedToBeLoggedIn() {
+        assertFalse(listMoviesMenuOperation.needsLogin());
     }
 
     @Test

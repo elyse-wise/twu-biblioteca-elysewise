@@ -64,7 +64,7 @@ public class MovieTest {
         Movie movie = new Movie("a", "b", "c", "0");
         assertTrue(movie.getDetailsString().contains("unrated"));
     }
-    
+
     @Test
     public void testMovieSetsRatingAsUnratedForRatingsAbove10() {
         Movie movie = new Movie("a", "b", "c", "11");

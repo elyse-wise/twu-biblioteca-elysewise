@@ -115,6 +115,11 @@ public class CheckoutBookMenuOperationTest {
         verify(library, never()).checkOutBook(-23);
     }
 
+    @Test
+    public void testUserNeedsToBeLoggedIn() {
+        assertTrue(checkoutBookMenuOperation.needsLogin());
+    }
+
     private void setUserInput(String inputs[]) {
         List<String> inputList = Arrays.asList(inputs);
         when(console.getUserCommand()).thenAnswer(AdditionalAnswers.returnsElementsOf(inputList));

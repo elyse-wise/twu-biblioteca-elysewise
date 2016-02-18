@@ -40,6 +40,11 @@ public class ListBooksMenuOperationTest {
     }
 
     @Test
+    public void testUserDoesNotNeedToBeLoggedIn() {
+        assertFalse(listBooksMenuOperation.needsLogin());
+    }
+
+    @Test
     public void testBookListPrintedOnExecute() {
         listBooksMenuOperation.execute(library, console);
         verify(console).printLibraryItemList(library.availableBooks());

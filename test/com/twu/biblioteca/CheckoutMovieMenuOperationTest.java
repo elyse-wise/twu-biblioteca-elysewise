@@ -93,6 +93,11 @@ public class CheckoutMovieMenuOperationTest {
         verify(library, never()).checkOutMovie(-23);
     }
 
+    @Test
+    public void testUserNeedsToBeLoggedIn() {
+        assertTrue(checkoutMovieMenuOperation.needsLogin());
+    }
+
     private void setUserInput(String inputs[]) {
         List<String> inputList = Arrays.asList(inputs);
         when(console.getUserCommand()).thenAnswer(AdditionalAnswers.returnsElementsOf(inputList));

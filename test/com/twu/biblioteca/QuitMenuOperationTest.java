@@ -33,6 +33,12 @@ public class QuitMenuOperationTest {
         assertTrue(quitMenuOperation.isTriggeredBy("Q"));
     }
 
+
+    @Test
+    public void testUserDoesNotNeedToBeLoggedIn() {
+        assertFalse(quitMenuOperation.needsLogin());
+    }
+
     @Test
     public void testExitMessagePrintedOnExecute() {
         quitMenuOperation.execute(library, console);

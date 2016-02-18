@@ -29,4 +29,9 @@ public class ReturnBookMenuOperation extends MenuOperation {
             return null;
         }
     }
+
+    @Override
+    public Boolean needsLogin() {
+        return true;
+    }
 }

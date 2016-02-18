@@ -26,4 +26,9 @@ public class CheckoutMovieMenuOperation extends MenuOperation {
             return null;
         }
     }
+
+    @Override
+    public Boolean needsLogin() {
+        return true;
+    }
 }
