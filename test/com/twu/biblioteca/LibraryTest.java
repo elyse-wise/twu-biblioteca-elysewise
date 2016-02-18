@@ -51,7 +51,7 @@ public class LibraryTest {
         library.setUserLoggedIn(true);
         assertTrue(library.userLoggedIn());
     }
-    
+
     @Test
     public void getUserLoggedInAsTrueIfUserIsNotLoggedIn() {
         library.setUserLoggedIn(false);

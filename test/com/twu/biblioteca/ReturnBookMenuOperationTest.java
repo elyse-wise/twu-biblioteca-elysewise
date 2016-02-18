@@ -116,7 +116,6 @@ public class ReturnBookMenuOperationTest {
         verify(library, never()).returnBook(-23);
     }
 
-
     @Test
     public void testUserNeedsToBeLoggedIn() {
         assertTrue(returnBookMenuOperation.needsLogin());

@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,8 +37,25 @@ public class BibliotecaApp {
         }
     }
 
-    private MenuOperation findMatchingMenuOperation(String command) {
+    private List<MenuOperation> availableMenuOperations() {
+        if (library.userLoggedIn()) {
+            return menuOperations;
+        }
+        return menuOperationsThatDoNotRequireLogin();
+    }
+
+    private List<MenuOperation> menuOperationsThatDoNotRequireLogin() {
+        List<MenuOperation> availableOperations = new ArrayList<MenuOperation>();
         for (MenuOperation op : menuOperations) {
+            if (!op.needsLogin()) {
+                availableOperations.add(op);
+            }
+        }
+        return availableOperations;
+    }
+
+    private MenuOperation findMatchingMenuOperation(String command) {
+        for (MenuOperation op : availableMenuOperations()) {
             if (op.isTriggeredBy(command)) {
                 return op;
             }
@@ -51,7 +69,7 @@ public class BibliotecaApp {
 
     private String getNextUserCommand() {
         console.printGap();
-        console.printMenuOptions(menuOperations);
+        console.printMenuOptions(availableMenuOperations());
         console.promptUserForMenuOption();
         return console.getUserCommand();
     }
