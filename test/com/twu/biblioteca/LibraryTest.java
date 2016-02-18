@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -25,13 +23,13 @@ public class LibraryTest {
         library.setAvailableBooks(buildListOfMockBooksWithSetSize(2));
         library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(3));
         library.setAvailableMovies(buildListOfMockMoviesWithSetSize(5));
-        library.setUserCredentials(buildUserCredentials());
+        library.setUserAccounts(buildUserAccounts());
     }
 
-    private Map<String, String> buildUserCredentials() {
-        Map<String,String> userCredentials = new HashMap<String, String>();
-        userCredentials.put("123-4567", "myPassword");
-        return userCredentials;
+    private List<User> buildUserAccounts() {
+        List<User> userAccounts = new ArrayList<User>();
+        userAccounts.add(new User("123-4567", "myPassword"));
+        return userAccounts;
     }
 
     private List<Book> buildListOfMockBooksWithSetSize(int amountOfBooks) {

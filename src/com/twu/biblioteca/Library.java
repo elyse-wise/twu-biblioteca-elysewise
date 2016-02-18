@@ -12,14 +12,15 @@ public class Library {
     private List<Book> availableBooks;
     private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
-    private Map<String, String> userCredentials;
+    private List<User> userAccounts;
+
     private Boolean userLoggedIn = false;
 
     public Library() {
         this.availableBooks = new ArrayList<Book>();
         this.checkedOutBooks = new ArrayList<Book>();
         this.availableMovies = new ArrayList<Movie>();
-        this.userCredentials = new HashMap<String, String>();
+        this.userAccounts = new ArrayList<User>();
     }
 
     public void setUserLoggedIn(Boolean loginState) {
@@ -42,8 +43,8 @@ public class Library {
         this.availableMovies = availableMovies;
     }
 
-    public void setUserCredentials(Map<String, String> userCredentials) {
-        this.userCredentials = userCredentials;
+    public void setUserAccounts(List<User> userAccounts) {
+        this.userAccounts = userAccounts;
     }
 
     public Boolean bookIsAvailable(int bookIndex) {
@@ -103,7 +104,10 @@ public class Library {
     }
 
     public Boolean validUserLogin(String libraryNumber, String password) {
-        String storedPassword = userCredentials.get(libraryNumber);
-        return (storedPassword != null && storedPassword.equals(password));
+        for (User u : userAccounts) {
+            if (u.matchedBy(libraryNumber, password))
+                return true;
+        }
+        return false;
     }
 }

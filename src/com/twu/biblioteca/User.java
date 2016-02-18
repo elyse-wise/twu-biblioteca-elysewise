@@ -19,6 +19,14 @@ public class User {
         this.phone = phone;
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.name = null;
+        this.email = null;
+        this.phone = null;
+    }
+
     public String getColumnString() {
         return String.format("%-30s %-30s %-30s", "Name", "Email Address", "Phone Number");
     }
