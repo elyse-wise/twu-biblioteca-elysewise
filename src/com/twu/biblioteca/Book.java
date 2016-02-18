@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 /**
  * Created by Elyse on 16/02/2016.
  */
-public class Book {
+public class Book implements LibraryItem {
 
     private String title;
     private String author;
