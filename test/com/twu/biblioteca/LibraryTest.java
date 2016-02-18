@@ -41,6 +41,10 @@ public class LibraryTest {
         return movieList;
     }
 
+    /* Books */
+
+    // Books in Library
+
     @Test
     public void testSetAvailableBooksUpdatesNumberOfBooksInLibrary() {
         List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
@@ -54,6 +58,30 @@ public class LibraryTest {
         library.setAvailableBooks(mockBookList);
         assertEquals(mockBookList, library.availableBooks());
     }
+
+    @Test
+    public void testBookZeroIsAvailableWhenBooksAreInLibrary() {
+        assertTrue(library.bookIsAvailable(0));
+    }
+
+    @Test
+    public void testBookZeroIsNotAvailableWhenNoBooksAreInLibrary() {
+        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
+        assertFalse(library.bookIsAvailable(0));
+    }
+
+    @Test
+    public void numberOfBooksInLibraryReturnsZeroForEmptyBookList() {
+        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
+        assertEquals(0, library.numberOfBooksInLibrary());
+    }
+
+    @Test
+    public void numberOfBooksInLibraryReturnsTwoForBookListOfTwo() {
+        assertEquals(2, library.numberOfBooksInLibrary());
+    }
+
+    // Checkout Books
 
     @Test
     public void testSetCheckedOutBooksUpdatesNumberOfBooksCheckedOut() {
@@ -70,22 +98,9 @@ public class LibraryTest {
     }
 
     @Test
-    public void testSetAvailableMoviesUpdatesNumberOfMoviesInLibrary() {
-        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
-        library.setAvailableMovies(mockMovieList);
-        assertEquals(76, library.numberOfMoviesInLibrary());
-    }
-
-    @Test
-    public void testSetAvailableMoviesUpdatesAvailableMoviesInLibrary() {
-        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
-        library.setAvailableMovies(mockMovieList);
-        assertEquals(mockMovieList, library.availableMovies());
-    }
-
-    @Test
-    public void testBookZeroIsAvailableWhenBooksAreInLibrary() {
-        assertTrue(library.bookIsAvailable(0));
+    public void numberOfBooksCheckedOutReturnsZeroForEmptyBookList() {
+        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
+        assertEquals(0, library.numberOfBooksCheckedOut());
     }
 
     @Test
@@ -94,32 +109,9 @@ public class LibraryTest {
     }
 
     @Test
-    public void testBookZeroIsNotAvailableWhenNoBooksAreInLibrary() {
-        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
-        assertFalse(library.bookIsAvailable(0));
-    }
-
-    @Test
     public void testBookZeroIsNotCheckedOutWhenNoBooksAreCheckedOutOfLibrary() {
         library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
         assertFalse(library.bookIsCheckedOut(0));
-    }
-
-    @Test
-    public void numberOfBooksInLibraryReturnsZeroForEmptyBookList() {
-        library.setAvailableBooks(buildListOfMockBooksWithSetSize(0));
-        assertEquals(0, library.numberOfBooksInLibrary());
-    }
-
-    @Test
-    public void numberOfBooksCheckedOutReturnsZeroForEmptyBookList() {
-        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
-        assertEquals(0, library.numberOfBooksCheckedOut());
-    }
-
-    @Test
-    public void numberOfBooksInLibraryReturnsTwoForBookListOfTwo() {
-        assertEquals(2, library.numberOfBooksInLibrary());
     }
 
     @Test
@@ -151,34 +143,7 @@ public class LibraryTest {
         assertEquals(3, library.numberOfBooksCheckedOut());
     }
 
-
-    @Test
-    public void testMovieZeroIsAvailableWhenMoviesAreInLibrary() {
-        assertTrue(library.movieIsAvailable(0));
-    }
-
-    @Test
-    public void testMovieZeroIsCheckedOutWhenMoviesAreCheckedOutOfLibrary() {
-        assertTrue(library.bookIsAvailable(0));
-    }
-
-    @Test
-    public void testMovieZeroIsNotAvailableWhenNoMoviesAreInLibrary() {
-        library.setAvailableMovies(buildListOfMockMoviesWithSetSize(0));
-        assertFalse(library.movieIsAvailable(0));
-    }
-
-    @Test
-    public void testValidCheckoutMovieOptionRemovesMovieFromList() {
-        library.checkOutMovie(0);
-        assertEquals(4, library.numberOfMoviesInLibrary());
-    }
-
-    @Test
-    public void testInvalidCheckoutMovieOptionDoesNotRemoveMovieFromList() {
-        library.checkOutMovie(54398);
-        assertEquals(5, library.numberOfMoviesInLibrary());
-    }
+    // Return Books
 
     @Test
     public void testValidReturnBookOptionAddsBookToAvailableList() {
@@ -203,4 +168,53 @@ public class LibraryTest {
         library.returnBook(54398);
         assertEquals(3, library.numberOfBooksCheckedOut());
     }
+
+    /* Movies */
+
+    // Movies in Library
+
+    @Test
+    public void testSetAvailableMoviesUpdatesNumberOfMoviesInLibrary() {
+        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
+        library.setAvailableMovies(mockMovieList);
+        assertEquals(76, library.numberOfMoviesInLibrary());
+    }
+
+    @Test
+    public void testSetAvailableMoviesUpdatesAvailableMoviesInLibrary() {
+        List<Movie> mockMovieList = buildListOfMockMoviesWithSetSize(76);
+        library.setAvailableMovies(mockMovieList);
+        assertEquals(mockMovieList, library.availableMovies());
+    }
+
+    @Test
+    public void testMovieZeroIsAvailableWhenMoviesAreInLibrary() {
+        assertTrue(library.movieIsAvailable(0));
+    }
+
+    @Test
+    public void testMovieZeroIsNotAvailableWhenNoMoviesAreInLibrary() {
+        library.setAvailableMovies(buildListOfMockMoviesWithSetSize(0));
+        assertFalse(library.movieIsAvailable(0));
+    }
+
+    // Checkout Movies
+
+    @Test
+    public void testMovieZeroIsCheckedOutWhenMoviesAreCheckedOutOfLibrary() {
+        assertTrue(library.bookIsAvailable(0));
+    }
+
+    @Test
+    public void testValidCheckoutMovieOptionRemovesMovieFromList() {
+        library.checkOutMovie(0);
+        assertEquals(4, library.numberOfMoviesInLibrary());
+    }
+
+    @Test
+    public void testInvalidCheckoutMovieOptionDoesNotRemoveMovieFromList() {
+        library.checkOutMovie(54398);
+        assertEquals(5, library.numberOfMoviesInLibrary());
+    }
+
 }
