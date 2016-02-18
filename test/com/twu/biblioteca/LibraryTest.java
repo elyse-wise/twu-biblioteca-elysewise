@@ -90,7 +90,7 @@ public class LibraryTest {
 
     @Test
     public void testBookZeroIsCheckedOutWhenBooksAreCheckedOutOfLibrary() {
-        assertTrue(library.bookIsAvailable(0));
+        assertTrue(library.bookIsCheckedOut(0));
     }
 
     @Test
