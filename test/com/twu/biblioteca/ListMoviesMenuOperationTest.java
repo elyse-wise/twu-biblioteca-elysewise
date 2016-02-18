@@ -36,7 +36,7 @@ public class ListMoviesMenuOperationTest {
     @Test
     public void testListMoviesHeaderPrintedOnExecute() {
         listMoviesMenuOperation.execute(library, console);
-        verify(console).printListItemsHeader();
+        verify(console).printMessage("Movies Currently In Library:");
     }
 
     @Test

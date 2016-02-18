@@ -70,15 +70,12 @@ public class Console {
         out.println(libraryItem.getDetailsString());
     }
 
-    public void promptUserForItemSelection() {
-        out.print("> Enter Item Number: ");
-    }
     public void warnInvalidMenuOption() {
         out.println("Select a valid option!");
     }
 
-    public void printListItemsHeader() {
-        out.println("Items Currently In Library:");
+    public void promptUserForItemSelection() {
+        out.print("> Enter Item Number: ");
     }
 
     public void printCheckoutItemsHeader() {
@@ -107,5 +104,9 @@ public class Console {
 
     public void printExitMessage() {
         out.println("Exiting Biblioteca...");
+    }
+
+    public void printMessage(String message) {
+        out.println(message);
     }
 }

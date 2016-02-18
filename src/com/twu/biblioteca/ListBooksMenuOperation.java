@@ -11,7 +11,7 @@ public class ListBooksMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printListItemsHeader();
+        console.printMessage("Books Currently In Library:");
         console.printLibraryItemList(library.availableBooks());
     }
 }

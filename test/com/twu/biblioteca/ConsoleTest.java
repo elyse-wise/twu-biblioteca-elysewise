@@ -25,6 +25,12 @@ public class ConsoleTest {
     }
 
     @Test
+    public void testPrintMessage() {
+        console.printMessage("this is a TEST!..");
+        verify(out).println("this is a TEST!..");
+    }
+
+    @Test
     public void testWelcomeMessageIsDisplayed() {
         console.printWelcome();
         verify(out).println("Welcome to Biblioteca!");
@@ -34,12 +40,6 @@ public class ConsoleTest {
     public void testExitMessageIsDisplayed() {
         console.printExitMessage();
         verify(out).println("Exiting Biblioteca...");
-    }
-
-    @Test
-    public void testHeaderIsDisplayedOnListLibraryItems() {
-        console.printListItemsHeader();
-        verify(out).println("Items Currently In Library:");
     }
 
     @Test

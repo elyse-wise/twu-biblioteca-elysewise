@@ -36,7 +36,7 @@ public class ListBooksMenuOperationTest {
     @Test
     public void testListBooksHeaderPrintedOnExecute() {
         listBooksMenuOperation.execute(library, console);
-        verify(console).printListItemsHeader();
+        verify(console).printMessage("Books Currently In Library:");
     }
 
     @Test
