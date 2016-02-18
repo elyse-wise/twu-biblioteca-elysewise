@@ -20,60 +20,25 @@ public class Console {
         out.println("Welcome to Biblioteca!");
     }
 
-    public void printBookList(List<Book> books) {
-        for (int i = 0; i < books.size(); i++) {
-            if (i == 0) {
-                printBookColumns(books.get(0));
-            }
-
-            printBookDetails(i, books.get(i));
-        }
-    }
-
-    public void printBookColumns(Book book) {
-        out.print(String.format("\t%-4s", ""));
-        out.println(book.getColumnString());
-    }
-
-    public void printBookDetails(int i, Book book) {
-        out.print(String.format("\t%-4s", i + "."));
-        out.println(book.getDetailsString());
-    }
-
-    public void printMovieList(List<Movie> movies) {
-        for (int i = 0; i < movies.size(); i++) {
-            if (i == 0) {
-                printMovieColumns(movies.get(0));
-            }
-            printMovieDetails(i, movies.get(i));
-        }
-    }
-
-    public void printMovieColumns(Movie movie) {
-        out.print(String.format("\t%-4s", ""));
-        out.println(movie.getColumnString());
-    }
-
-    public void printMovieDetails(int i, Movie movie) {
-        out.print(String.format("\t%-4s", i + "."));
-        out.println(movie.getDetailsString());
+    public void printGap() {
+        out.println();
     }
 
     public void printMenuOptions(List<MenuOperation> menuOperations) {
         out.println("Menu Options:");
 
         for (MenuOperation op : menuOperations) {
-            out.print("\t " + op.getTrigger() + " => ");
-            out.println(op.getDescription());
+            printMenuOption(op);
         }
+    }
+
+    public void printMenuOption(MenuOperation op) {
+        out.print("\t " + op.getTrigger() + " => ");
+        out.println(op.getDescription());
     }
 
     public void promptUserForMenuOption() {
         out.print("> Enter Menu Option: ");
-    }
-
-    public void promptUserForBookSelection() {
-        out.print("> Enter Book Code: ");
     }
 
     public String getUserCommand() {
@@ -87,20 +52,49 @@ public class Console {
         return command;
     }
 
+
+    public void printLibraryItemList(List<? extends LibraryItem> items) {
+        for (int i = 0; i < items.size(); i++) {
+            if (i == 0) printLibraryItemColumns(items.get(0));
+            printLibraryItemDetails(i, items.get(i));
+        }
+    }
+
+    public void printLibraryItemColumns(LibraryItem libraryItem) {
+        out.print(String.format("\t%-4s", ""));
+        out.println(libraryItem.getColumnString());
+    }
+
+    public void printLibraryItemDetails(int i, LibraryItem libraryItem) {
+        out.print(String.format("\t%-4s", i + "."));
+        out.println(libraryItem.getDetailsString());
+    }
+
+    public void promptUserForItemSelection() {
+        out.print("> Enter Item Number: ");
+    }
     public void warnInvalidMenuOption() {
         out.println("Select a valid option!");
     }
 
-    public void warnInvalidBookSelection() {
-        out.println("That book is not available");
+    public void printListItemsHeader() {
+        out.println("Items Currently In Library:");
     }
 
-    public void thankUserForCheckingOut() {
+    public void printCheckoutItemsHeader() {
+        out.println("Items Available For Checkout:");
+    }
+
+    public void thankUserForCheckingOutBook() {
         out.println("Thank you! Enjoy the book");
     }
 
-    public void printGap() {
-        out.println();
+    public void warnInvalidBookSelectionForCheckout() {
+        out.println("That book is not available");
+    }
+
+    public void printReturnBooksHeader() {
+        out.println("Books Available For Return:");
     }
 
     public void thankUserForReturningBook() {
@@ -111,31 +105,7 @@ public class Console {
         out.println("That is not a valid book to return");
     }
 
-    public void printListBooksHeader() {
-        out.println("Books Currently In Library:");
-    }
-
-    public void printListMoviesHeader() {
-        out.println("Movies Currently In Library:");
-    }
-
-    public void printCheckoutBooksHeader() {
-        out.println("Books Available For Checkout:");
-    }
-
-    public void printReturnBooksHeader() {
-        out.println("Books Available For Return:");
-    }
-
     public void printExitMessage() {
         out.println("Exiting Biblioteca...");
-    }
-
-    public void promptUserForMovieSelection() {
-        out.print("> Enter Movie Code: ");
-    }
-
-    public void printCheckoutMoviesHeader() {
-        out.println("Movies Available For Checkout:");
     }
 }

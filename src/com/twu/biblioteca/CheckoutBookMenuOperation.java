@@ -10,15 +10,15 @@ public class CheckoutBookMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printCheckoutBooksHeader();
-        console.printBookList(library.availableBooks());
-        console.promptUserForBookSelection();
+        console.printCheckoutItemsHeader();
+        console.printLibraryItemList(library.availableBooks());
+        console.promptUserForItemSelection();
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.bookIsAvailable(selection)) {
             library.checkOutBook(selection);
-            console.thankUserForCheckingOut();
+            console.thankUserForCheckingOutBook();
         } else {
-            console.warnInvalidBookSelection();
+            console.warnInvalidBookSelectionForCheckout();
         }
     }
 

@@ -38,13 +38,13 @@ public class ConsoleTest {
 
     @Test
     public void testHeaderIsDisplayedOnListBooks() {
-        console.printListBooksHeader();
+        console.printListItemsHeader();
         verify(out).println("Books Currently In Library:");
     }
 
     @Test
     public void testHeaderIsDisplayedOnCheckoutBooks() {
-        console.printCheckoutBooksHeader();
+        console.printCheckoutItemsHeader();
         verify(out).println("Books Available For Checkout:");
     }
 
@@ -56,7 +56,7 @@ public class ConsoleTest {
 
     @Test
     public void testNoBooksArePrintedWhenBookListIsEmpty() {
-        console.printBookList(new ArrayList<Book>());
+        console.printLibraryItemList(new ArrayList<Book>());
         verify(out, never()).println();
     }
 
@@ -66,7 +66,7 @@ public class ConsoleTest {
         Book testBook = mock(Book.class);
         books.add(testBook);
 
-        console.printBookList(books);
+        console.printLibraryItemList(books);
         verify(testBook, times(1)).getDetailsString();
     }
 
@@ -80,7 +80,7 @@ public class ConsoleTest {
         books.add(testBook2);
         books.add(testBook3);
 
-        console.printBookList(books);
+        console.printLibraryItemList(books);
         verify(testBook1, times(1)).getDetailsString();
         verify(testBook2, times(1)).getDetailsString();
         verify(testBook3, times(1)).getDetailsString();
@@ -92,14 +92,13 @@ public class ConsoleTest {
         Book testBook = mock(Book.class);
         books.add(testBook);
 
-        console.printBookList(books);
+        console.printLibraryItemList(books);
         verify(testBook, times(1)).getColumnString();
     }
 
-
     @Test
     public void testNoMoviesArePrintedWhenMovieListIsEmpty() {
-        console.printMovieList(new ArrayList<Movie>());
+        console.printLibraryItemList(new ArrayList<Movie>());
         verify(out, never()).println();
     }
 
@@ -109,7 +108,7 @@ public class ConsoleTest {
         Movie movie = mock(Movie.class);
         movies.add(movie);
 
-        console.printMovieList(movies);
+        console.printLibraryItemList(movies);
         verify(movie, times(1)).getDetailsString();
     }
 
@@ -123,7 +122,7 @@ public class ConsoleTest {
         movies.add(testMovie2);
         movies.add(testMovie3);
 
-        console.printMovieList(movies);
+        console.printLibraryItemList(movies);
         verify(testMovie1, times(1)).getDetailsString();
         verify(testMovie2, times(1)).getDetailsString();
         verify(testMovie3, times(1)).getDetailsString();
@@ -135,7 +134,7 @@ public class ConsoleTest {
         Movie testMovie = mock(Movie.class);
         movies.add(testMovie);
 
-        console.printMovieList(movies);
+        console.printLibraryItemList(movies);
         verify(testMovie, times(1)).getColumnString();
     }
 
@@ -158,13 +157,13 @@ public class ConsoleTest {
 
     @Test
     public void testWarnInvalidBookSelectionForCheckout() {
-        console.warnInvalidBookSelection();
+        console.warnInvalidBookSelectionForCheckout();
         verify(out).println("That book is not available");
     }
 
     @Test
     public void testThankUserForCheckingOut() {
-        console.thankUserForCheckingOut();
+        console.thankUserForCheckingOutBook();
         verify(out).println("Thank you! Enjoy the book");
     }
 

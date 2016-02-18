@@ -11,8 +11,8 @@ public class ReturnBookMenuOperation extends MenuOperation {
     @Override
     void execute(Library library, Console console) {
         console.printReturnBooksHeader();
-        console.printBookList(library.checkedOutBooks());
-        console.promptUserForBookSelection();
+        console.printLibraryItemList(library.checkedOutBooks());
+        console.promptUserForItemSelection();
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.bookIsCheckedOut(selection)) {
             library.returnBook(selection);

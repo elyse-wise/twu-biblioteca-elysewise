@@ -36,12 +36,12 @@ public class ListBooksMenuOperationTest {
     @Test
     public void testListBooksHeaderPrintedOnExecute() {
         listBooksMenuOperation.execute(library, console);
-        verify(console).printListBooksHeader();
+        verify(console).printListItemsHeader();
     }
 
     @Test
     public void testBookListPrintedOnExecute() {
         listBooksMenuOperation.execute(library, console);
-        verify(console).printBookList(library.availableBooks());
+        verify(console).printLibraryItemList(library.availableBooks());
     }
 }

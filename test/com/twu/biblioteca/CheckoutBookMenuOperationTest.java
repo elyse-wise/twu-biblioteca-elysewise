@@ -54,19 +54,19 @@ public class CheckoutBookMenuOperationTest {
     @Test
     public void testCheckoutBooksHeaderPrintedOnExecute() {
         checkoutBookMenuOperation.execute(library, console);
-        verify(console).printCheckoutBooksHeader();
+        verify(console).printCheckoutItemsHeader();
     }
 
     @Test
     public void testAvailableBookListPrintedOnExecute() {
         checkoutBookMenuOperation.execute(library, console);
-        verify(console).printBookList(library.availableBooks());
+        verify(console).printLibraryItemList(library.availableBooks());
     }
 
     @Test
     public void testUserPromptedForBookSelectionOnExecute() {
         checkoutBookMenuOperation.execute(library, console);
-        verify(console).promptUserForBookSelection();
+        verify(console).promptUserForItemSelection();
     }
 
 
@@ -87,7 +87,7 @@ public class CheckoutBookMenuOperationTest {
 
         checkoutBookMenuOperation.execute(library, console);
         verify(console, never()).warnInvalidMenuOption();
-        verify(console, times(1)).thankUserForCheckingOut();
+        verify(console, times(1)).thankUserForCheckingOutBook();
     }
 
     @Test
@@ -96,7 +96,7 @@ public class CheckoutBookMenuOperationTest {
         setUserInput(commands);
 
         checkoutBookMenuOperation.execute(library, console);
-        verify(console, times(1)).warnInvalidBookSelection();
+        verify(console, times(1)).warnInvalidBookSelectionForCheckout();
     }
 
     @Test

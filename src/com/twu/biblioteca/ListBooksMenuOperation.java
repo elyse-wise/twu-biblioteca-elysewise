@@ -11,7 +11,7 @@ public class ListBooksMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printListBooksHeader();
-        console.printBookList(library.availableBooks());
+        console.printListItemsHeader();
+        console.printLibraryItemList(library.availableBooks());
     }
 }

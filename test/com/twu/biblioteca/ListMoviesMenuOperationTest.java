@@ -36,12 +36,12 @@ public class ListMoviesMenuOperationTest {
     @Test
     public void testListMoviesHeaderPrintedOnExecute() {
         listMoviesMenuOperation.execute(library, console);
-        verify(console).printListMoviesHeader();
+        verify(console).printListItemsHeader();
     }
 
     @Test
     public void testMovieListPrintedOnExecute() {
         listMoviesMenuOperation.execute(library, console);
-        verify(console).printMovieList(library.availableMovies());
+        verify(console).printLibraryItemList(library.availableMovies());
     }
 }

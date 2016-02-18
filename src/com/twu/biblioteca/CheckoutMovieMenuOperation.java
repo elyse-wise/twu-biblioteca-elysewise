@@ -10,9 +10,9 @@ public class CheckoutMovieMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printCheckoutMoviesHeader();
-        console.printMovieList(library.availableMovies());
-        console.promptUserForMovieSelection();
+        console.printCheckoutItemsHeader();
+        console.printLibraryItemList(library.availableMovies());
+        console.promptUserForItemSelection();
         Integer selection = getAsInteger(console.getUserCommand());
         if (selection != null && library.movieIsAvailable(selection)) {
             library.checkOutMovie(selection);

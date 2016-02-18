@@ -48,19 +48,19 @@ public class CheckoutMovieMenuOperationTest {
     @Test
     public void testCheckoutMoviesHeaderPrintedOnExecute() {
         checkoutMovieMenuOperation.execute(library, console);
-        verify(console).printCheckoutMoviesHeader();
+        verify(console).printCheckoutItemsHeader();
     }
 
     @Test
     public void testAvailableMovieListPrintedOnExecute() {
         checkoutMovieMenuOperation.execute(library, console);
-        verify(console).printMovieList(library.availableMovies());
+        verify(console).printLibraryItemList(library.availableMovies());
     }
 
     @Test
     public void testUserPromptedForMovieSelectionOnExecute() {
         checkoutMovieMenuOperation.execute(library, console);
-        verify(console).promptUserForMovieSelection();
+        verify(console).promptUserForItemSelection();
     }
 
     @Test

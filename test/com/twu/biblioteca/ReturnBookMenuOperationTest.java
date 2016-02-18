@@ -60,13 +60,13 @@ public class ReturnBookMenuOperationTest {
     @Test
     public void testCheckedOutBookListPrintedOnExecute() {
         returnBookMenuOperation.execute(library, console);
-        verify(console).printBookList(library.checkedOutBooks());
+        verify(console).printLibraryItemList(library.checkedOutBooks());
     }
 
     @Test
     public void testUserPromptedForBookSelectionOnExecute() {
         returnBookMenuOperation.execute(library, console);
-        verify(console).promptUserForBookSelection();
+        verify(console).promptUserForItemSelection();
     }
 
     @Test
