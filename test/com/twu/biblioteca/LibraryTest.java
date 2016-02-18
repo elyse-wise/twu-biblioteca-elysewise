@@ -16,13 +16,13 @@ public class LibraryTest {
 
     private Library library;
 
-
     @Before
     public void setup() {
-        //start with library of 2 available books, 3 checked out books
+        //start with library of 2 available books, 3 checked out books, 5 available movies
         library = new Library();
         library.setAvailableBooks(buildListOfMockBooksWithSetSize(2));
         library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(3));
+        library.setAvailableMovies(buildListOfMockMoviesWithSetSize(5));
     }
 
     private List<Book> buildListOfMockBooksWithSetSize(int amountOfBooks) {
@@ -149,6 +149,35 @@ public class LibraryTest {
     public void testInvalidCheckoutBookOptionDoesNotAddBookToCheckedOutList() {
         library.checkOutBook(54398);
         assertEquals(3, library.numberOfBooksCheckedOut());
+    }
+
+
+    @Test
+    public void testMovieZeroIsAvailableWhenMoviesAreInLibrary() {
+        assertTrue(library.movieIsAvailable(0));
+    }
+
+    @Test
+    public void testMovieZeroIsCheckedOutWhenMoviesAreCheckedOutOfLibrary() {
+        assertTrue(library.bookIsAvailable(0));
+    }
+
+    @Test
+    public void testMovieZeroIsNotAvailableWhenNoMoviesAreInLibrary() {
+        library.setAvailableMovies(buildListOfMockMoviesWithSetSize(0));
+        assertFalse(library.movieIsAvailable(0));
+    }
+
+    @Test
+    public void testValidCheckoutMovieOptionRemovesMovieFromList() {
+        library.checkOutMovie(0);
+        assertEquals(4, library.numberOfMoviesInLibrary());
+    }
+
+    @Test
+    public void testInvalidCheckoutMovieOptionDoesNotRemoveMovieFromList() {
+        library.checkOutMovie(54398);
+        assertEquals(5, library.numberOfMoviesInLibrary());
     }
 
     @Test

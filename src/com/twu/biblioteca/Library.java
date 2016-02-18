@@ -33,6 +33,10 @@ public class Library {
         return (bookIndex >= 0 && bookIndex < availableBooks.size());
     }
 
+    public Boolean movieIsAvailable(int movieIndex) {
+        return (movieIndex >= 0 && movieIndex < availableMovies.size());
+    }
+
     public Boolean bookIsCheckedOut(int bookIndex) {
         return (bookIndex >= 0 && bookIndex < checkedOutBooks.size());
     }
@@ -75,4 +79,9 @@ public class Library {
         }
     }
 
+    public void checkOutMovie(int movieIndex) {
+        if (movieIsAvailable(movieIndex)) {
+            Movie m = availableMovies.remove(movieIndex);
+        }
+    }
 }
