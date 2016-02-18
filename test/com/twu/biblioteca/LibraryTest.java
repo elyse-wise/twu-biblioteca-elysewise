@@ -25,6 +25,13 @@ public class LibraryTest {
         library.setAvailableBooks(buildListOfMockBooksWithSetSize(2));
         library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(3));
         library.setAvailableMovies(buildListOfMockMoviesWithSetSize(5));
+        library.setUserCredentials(buildUserCredentials());
+    }
+
+    private Map<String, String> buildUserCredentials() {
+        Map<String,String> userCredentials = new HashMap<String, String>();
+        userCredentials.put("123-4567", "myPassword");
+        return userCredentials;
     }
 
     private List<Book> buildListOfMockBooksWithSetSize(int amountOfBooks) {
@@ -236,32 +243,22 @@ public class LibraryTest {
         assertEquals(5, library.numberOfMoviesInLibrary());
     }
 
+    // User Login
+
     @Test
     public void testValidLoginWhenLibraryNumberAndPasswordMatch() {
-        Map<String,String> userCredentials = new HashMap<String, String>();
-        userCredentials.put("123-4567", "myPassword");
-        library.setUserCredentials(userCredentials);
-
         assertTrue(library.validUserLogin("123-4567", "myPassword"));
     }
 
 
     @Test
     public void testInValidLoginWhenLibraryNumberMatchesAndPasswordDoesNotMatch() {
-        Map<String,String> userCredentials = new HashMap<String, String>();
-        userCredentials.put("123-4567", "myPassword");
-        library.setUserCredentials(userCredentials);
-
         assertFalse(library.validUserLogin("123-4567", "&*^%&*^%*&*"));
     }
 
 
     @Test
     public void testInValidLoginWhenLibraryNumberDoesNotMatchAndPasswordDoes() {
-        Map<String,String> userCredentials = new HashMap<String, String>();
-        userCredentials.put("123-4567", "myPassword");
-        library.setUserCredentials(userCredentials);
-
         assertFalse(library.validUserLogin("123-4588", "myPassword"));
     }
 
