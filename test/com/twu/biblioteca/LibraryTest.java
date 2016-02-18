@@ -41,6 +41,23 @@ public class LibraryTest {
         return movieList;
     }
 
+    @Test
+    public void getUserLoggedInIsFalseByDefault() {
+        assertFalse(library.userLoggedIn());
+    }
+
+    @Test
+    public void getUserLoggedInAsTrueIfUserIsLoggedIn() {
+        library.setUserLoggedIn(true);
+        assertTrue(library.userLoggedIn());
+    }
+    
+    @Test
+    public void getUserLoggedInAsTrueIfUserIsNotLoggedIn() {
+        library.setUserLoggedIn(false);
+        assertFalse(library.userLoggedIn());
+    }
+
     /* Books */
 
     // Books in Library

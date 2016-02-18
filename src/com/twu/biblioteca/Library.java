@@ -10,11 +10,20 @@ public class Library {
     private List<Book> availableBooks;
     private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
+    private Boolean userLoggedIn = false;
 
     public Library() {
         this.availableBooks = new ArrayList<Book>();
         this.checkedOutBooks = new ArrayList<Book>();
         this.availableMovies = new ArrayList<Movie>();
+    }
+
+    public void setUserLoggedIn(Boolean loginState) {
+        this.userLoggedIn = loginState;
+    }
+
+    public Boolean userLoggedIn() {
+        return userLoggedIn;
     }
 
     public void setAvailableBooks(List<Book> availableBooks) {
