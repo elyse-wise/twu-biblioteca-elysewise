@@ -20,11 +20,14 @@ public class User {
     }
 
     public String getColumnString() {
-        return null; //TODO
+        return String.format("%-30s %-30s %-30s", "Name", "Email Address", "Phone Number");
     }
 
     public String getDetailsString() {
-        return null; //TODO
+        return String.format("%-30.28s %-30.28s %-30.28s", name, email, phone);
     }
 
+    public Boolean matchedBy(String username, String password) {
+        return (this.username.equals(username) && this.password.equals(password));
+    }
 }

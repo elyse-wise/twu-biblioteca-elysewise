@@ -49,4 +49,19 @@ public class UserTest {
         assertTrue(details.contains("Email Address"));
         assertTrue(details.contains("Phone Number"));
     }
+
+    @Test
+    public void testMatchOnSameLibraryNumberAndPassword() {
+        assertTrue(user.matchedBy("123-4567", "Password"));
+    }
+
+    @Test
+    public void testNoMatchOnSameLibraryNumberAndDifferentPassword() {
+        assertFalse(user.matchedBy("123-4567", "*&^*&^"));
+    }
+
+    @Test
+    public void testNoMatchOnDifferentLibraryNumberAndSamePassword() {
+        assertFalse(user.matchedBy("123-9967", "Password"));
+    }
 }
