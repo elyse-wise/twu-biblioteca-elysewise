@@ -59,7 +59,7 @@ public class UserLoginMenuOperationTest {
 
     @Test
     public void testUserIsLoggedInToLibraryWhenTheyEnterAValidLibraryNumberAndValidPassword() {
-        String commands[] = {validLibraryNumber, "validPassword"};
+        String commands[] = {validLibraryNumber, "ValidPassword"};
         setUserInput(commands);
 
         userLoginMenuOperation.execute(library, console);
