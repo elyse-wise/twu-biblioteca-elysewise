@@ -94,7 +94,7 @@ public class Console {
     }
 
     public void printReturnBooksHeader() {
-        out.println("Books Available For Return:");
+        out.println("Items Available For Return:");
     }
 
     public void thankUserForReturningBook() {

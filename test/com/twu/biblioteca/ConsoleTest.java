@@ -37,105 +37,63 @@ public class ConsoleTest {
     }
 
     @Test
-    public void testHeaderIsDisplayedOnListBooks() {
+    public void testHeaderIsDisplayedOnListLibraryItems() {
         console.printListItemsHeader();
-        verify(out).println("Books Currently In Library:");
+        verify(out).println("Items Currently In Library:");
     }
 
     @Test
-    public void testHeaderIsDisplayedOnCheckoutBooks() {
+    public void testHeaderIsDisplayedOnCheckoutItems() {
         console.printCheckoutItemsHeader();
-        verify(out).println("Books Available For Checkout:");
+        verify(out).println("Items Available For Checkout:");
     }
 
     @Test
     public void testHeaderIsDisplayedOnReturnBooks() {
         console.printReturnBooksHeader();
-        verify(out).println("Books Available For Return:");
+        verify(out).println("Items Available For Return:");
     }
 
     @Test
-    public void testNoBooksArePrintedWhenBookListIsEmpty() {
-        console.printLibraryItemList(new ArrayList<Book>());
+    public void testNoItemsArePrintedWhenItemListIsEmpty() {
+        console.printLibraryItemList(new ArrayList<LibraryItem>());
         verify(out, never()).println();
     }
 
     @Test
-    public void testOneBookIsPrintedWhenBookListHasOneBook() {
-        List<Book> books = new ArrayList<Book>();
-        Book testBook = mock(Book.class);
-        books.add(testBook);
+    public void testOneItemIsPrintedWhenLibraryItemListHasOneItem() {
+        List<LibraryItem> items = new ArrayList<LibraryItem>();
+        LibraryItem item = mock(LibraryItem.class);
+        items.add(item);
 
-        console.printLibraryItemList(books);
-        verify(testBook, times(1)).getDetailsString();
+        console.printLibraryItemList(items);
+        verify(item, times(1)).getDetailsString();
     }
 
     @Test
-    public void testAllBooksPrintedWhenBookListHasMultipleBooks() {
-        List<Book> books = new ArrayList<Book>();
-        Book testBook1 = mock(Book.class);
-        Book testBook2 = mock(Book.class);
-        Book testBook3 = mock(Book.class);
-        books.add(testBook1);
-        books.add(testBook2);
-        books.add(testBook3);
+    public void testAllItemsPrintedWhenLibraryItemListHasMultipleItems() {
+        List<LibraryItem> items = new ArrayList<LibraryItem>();
+        LibraryItem test1 = mock(LibraryItem.class);
+        LibraryItem test2 = mock(LibraryItem.class);
+        LibraryItem test3 = mock(LibraryItem.class);
+        items.add(test1);
+        items.add(test2);
+        items.add(test3);
 
-        console.printLibraryItemList(books);
-        verify(testBook1, times(1)).getDetailsString();
-        verify(testBook2, times(1)).getDetailsString();
-        verify(testBook3, times(1)).getDetailsString();
+        console.printLibraryItemList(items);
+        verify(test1, times(1)).getDetailsString();
+        verify(test2, times(1)).getDetailsString();
+        verify(test3, times(1)).getDetailsString();
     }
 
     @Test
-    public void testColumnsArePrintedWhenShowingBookList() {
-        List<Book> books = new ArrayList<Book>();
-        Book testBook = mock(Book.class);
-        books.add(testBook);
+    public void testColumnsArePrintedWhenShowingLibraryItemList() {
+        List<LibraryItem> items = new ArrayList<LibraryItem>();
+        LibraryItem testItem = mock(LibraryItem.class);
+        items.add(testItem);
 
-        console.printLibraryItemList(books);
-        verify(testBook, times(1)).getColumnString();
-    }
-
-    @Test
-    public void testNoMoviesArePrintedWhenMovieListIsEmpty() {
-        console.printLibraryItemList(new ArrayList<Movie>());
-        verify(out, never()).println();
-    }
-
-    @Test
-    public void testOneMovieIsPrintedWhenMovieListHasOneBook() {
-        List<Movie> movies = new ArrayList<Movie>();
-        Movie movie = mock(Movie.class);
-        movies.add(movie);
-
-        console.printLibraryItemList(movies);
-        verify(movie, times(1)).getDetailsString();
-    }
-
-    @Test
-    public void testAllMoviesPrintedWhenMovieListHasMultipleMovies() {
-        List<Movie> movies = new ArrayList<Movie>();
-        Movie testMovie1 = mock(Movie.class);
-        Movie testMovie2 = mock(Movie.class);
-        Movie testMovie3 = mock(Movie.class);
-        movies.add(testMovie1);
-        movies.add(testMovie2);
-        movies.add(testMovie3);
-
-        console.printLibraryItemList(movies);
-        verify(testMovie1, times(1)).getDetailsString();
-        verify(testMovie2, times(1)).getDetailsString();
-        verify(testMovie3, times(1)).getDetailsString();
-    }
-
-    @Test
-    public void testColumnsArePrintedWhenShowingMovieList() {
-        List<Movie> movies= new ArrayList<Movie>();
-        Movie testMovie = mock(Movie.class);
-        movies.add(testMovie);
-
-        console.printLibraryItemList(movies);
-        verify(testMovie, times(1)).getColumnString();
+        console.printLibraryItemList(items);
+        verify(testItem, times(1)).getColumnString();
     }
 
     @Test
