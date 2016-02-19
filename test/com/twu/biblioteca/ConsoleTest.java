@@ -95,4 +95,18 @@ public class ConsoleTest {
         verify(out).println("Select a valid option!");
     }
 
+    @Test
+    public void testColumnsArePrintedWhenShowingUserDetails() {
+        User user = mock(User.class);
+        console.printUserDetails(user);
+        verify(user, times(1)).getColumnString();
+    }
+
+    @Test
+    public void testDetailsArePrintedWhenShowingUserDetails() {
+        User user = mock(User.class);
+        console.printUserDetails(user);
+        verify(user, times(1)).getDetailsString();
+    }
+
 }

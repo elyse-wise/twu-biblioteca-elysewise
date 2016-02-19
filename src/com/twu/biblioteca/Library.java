@@ -43,6 +43,10 @@ public class Library {
         this.activeUser = activeUser;
     }
 
+    public User activeUser() {
+        return activeUser;
+    }
+
     public Boolean userLoggedIn() {
         return (activeUser != null);
     }

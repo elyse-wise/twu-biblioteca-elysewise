@@ -77,4 +77,8 @@ public class Console {
     public void printMessage(String message) {
         out.println(message);
     }
+
+    public void printUserDetails(User user) {
+
+    }
 }
