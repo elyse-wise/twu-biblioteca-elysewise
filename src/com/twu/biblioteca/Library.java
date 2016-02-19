@@ -43,6 +43,11 @@ public class Library {
         this.activeUser = activeUser;
     }
 
+    public void logoutUser() {
+        activeUser = null;
+    }
+
+
     public User activeUser() {
         return activeUser;
     }

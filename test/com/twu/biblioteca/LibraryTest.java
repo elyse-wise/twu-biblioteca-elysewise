@@ -260,11 +260,6 @@ public class LibraryTest {
     }
 
     @Test
-    public void getUserLoggedInAsFalseIfUserIsNotLoggedIn() {
-        assertFalse(library.userLoggedIn());
-    }
-
-    @Test
     public void testValidLoginWhenLibraryNumberAndPasswordMatch() {
         assertTrue(library.validUserLogin("123-4567", "myPassword"));
     }
@@ -300,6 +295,20 @@ public class LibraryTest {
     @Test
     public void getAdministratorLoggedInAsFalseIfUserWithoutAdminAccessIsLoggedIn() {
         library.attemptUserLogin("123-4567", "myPassword");
+        assertFalse(library.administratorLoggedIn());
+    }
+
+    @Test
+    public void getUserLoggedInAsFalseAfterUserLogsOut() {
+        library.attemptUserLogin("123-4567", "myPassword");
+        library.logoutUser();
+        assertFalse(library.userLoggedIn());
+    }
+
+    @Test
+    public void getAdministratorLoggedInAsFalseAfterAdministratorLogsOut() {
+        library.attemptUserLogin("000-1111", "administratorPassword");
+        library.logoutUser();
         assertFalse(library.administratorLoggedIn());
     }
 
