@@ -2,15 +2,10 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.AdditionalAnswers;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Elyse on 19/02/2016.
@@ -20,7 +15,6 @@ public class ViewUserDetailsMenuOperationTest {
     private ViewUserDetailsMenuOperation viewUserDetailsMenuOperation;
     private Library library;
     private Console console;
-    private User user;
 
     @Before
     public void setup() {

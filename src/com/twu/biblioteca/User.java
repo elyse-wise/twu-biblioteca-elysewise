@@ -1,9 +1,5 @@
 package com.twu.biblioteca;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.List;
-
 /**
  * Created by Elyse on 18/02/2016.
  */
