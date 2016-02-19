@@ -29,6 +29,7 @@ public class Main {
         library.setAvailableBooks(buildAvailableBooks());
         library.setCheckedOutBooks(buildCheckedOutBooks());
         library.setAvailableMovies(buildAvailableMovies());
+        library.setUserAccounts(buildUserAccounts());
         return library;
     }
 
@@ -57,5 +58,17 @@ public class Main {
         movies.add(new Movie("MovieB", "1983", "DirectorB", "2"));
         movies.add(new Movie("MovieC", "2002", "DirectorC", "3"));
         return movies;
+    }
+
+    private static List<User> buildUserAccounts() {
+        List<User> userList = new ArrayList<User>();
+
+        UserDetails details = new UserDetails("Joe", "Joe@live.com", "987653215");
+        userList.add(new User("123-4567", "ValidPassword", details));
+
+        details = new UserDetails("Pippa", "pippa@gmail.com", "994353215");
+        userList.add(new User("111-2222", "AnotherValidPassword", details));
+
+        return userList;
     }
 }

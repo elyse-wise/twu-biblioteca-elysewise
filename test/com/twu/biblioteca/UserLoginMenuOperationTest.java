@@ -58,21 +58,12 @@ public class UserLoginMenuOperationTest {
     }
 
     @Test
-    public void testUserIsLoggedInToLibraryWhenTheyEnterAValidLibraryNumberAndValidPassword() {
+    public void testAttemptedLoginWhenUserEntersAValidLibraryNumberAndValidPassword() {
         String commands[] = {validLibraryNumber, "ValidPassword"};
         setUserInput(commands);
 
         userLoginMenuOperation.execute(library, console);
-        verify(library).setUserLoggedIn(true);
-    }
-
-    @Test
-    public void testUserIsNotLoggedInToLibraryWhenTheyEnterAValidLibraryNumberAndInvalidPassword() {
-        String commands[] = {validLibraryNumber, "^%$&^%$&$%$^&&%$"};
-        setUserInput(commands);
-
-        userLoginMenuOperation.execute(library, console);
-        verify(library, never()).setUserLoggedIn(true);
+        verify(library).attemptUserLogin(validLibraryNumber, "ValidPassword");
     }
 
     @Test
@@ -81,7 +72,7 @@ public class UserLoginMenuOperationTest {
         setUserInput(commands);
 
         userLoginMenuOperation.execute(library, console);
-        verify(library, never()).setUserLoggedIn(true);
+        verify(library, never()).attemptUserLogin(validLibraryNumber, "ValidPassword");
     }
 
     private void setUserInput(String inputs[]) {

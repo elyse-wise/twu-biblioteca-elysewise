@@ -13,8 +13,7 @@ public class Library {
     private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
     private List<User> userAccounts;
-
-    private Boolean userLoggedIn = false;
+    private User activeUser;
 
     public Library() {
         this.availableBooks = new ArrayList<Book>();
@@ -23,12 +22,32 @@ public class Library {
         this.userAccounts = new ArrayList<User>();
     }
 
-    public void setUserLoggedIn(Boolean loginState) {
-        this.userLoggedIn = loginState;
+    public User getUserWithCredentials(String libraryNumber, String password) {
+        for (User u : userAccounts) {
+            if (u.matchedBy(libraryNumber, password)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public Boolean validUserLogin(String libraryNumber, String password) {
+        return (getUserWithCredentials(libraryNumber, password) != null);
+    }
+
+    public void attemptUserLogin(String libraryNumber, String password) {
+        User u = getUserWithCredentials(libraryNumber, password);
+        if (u != null) {
+            setActiveUser(u);
+        }
+    }
+
+    private void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 
     public Boolean userLoggedIn() {
-        return userLoggedIn;
+        return (activeUser != null);
     }
 
     public void setAvailableBooks(List<Book> availableBooks) {
@@ -101,13 +120,5 @@ public class Library {
         if (movieIsAvailable(movieIndex)) {
             Movie m = availableMovies.remove(movieIndex);
         }
-    }
-
-    public Boolean validUserLogin(String libraryNumber, String password) {
-        for (User u : userAccounts) {
-            if (u.matchedBy(libraryNumber, password))
-                return true;
-        }
-        return false;
     }
 }

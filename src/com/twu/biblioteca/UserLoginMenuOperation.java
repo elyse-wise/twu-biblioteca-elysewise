@@ -10,20 +10,26 @@ public class UserLoginMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        console.printMessage("> Enter library number: ");
-        if(isAValidLibraryNumber(console.getUserCommand())) {
-            console.printMessage("> Enter password: ");
-            if (isAValidPassword(console.getUserCommand())) {
-                library.setUserLoggedIn(true);
-            }
+        String libraryNumber = getLibraryNumberFromUser(console);
+        if (isAValidLibraryNumber(libraryNumber)) {
+            String password = getPasswordFromUser(console);
+            library.attemptUserLogin(libraryNumber, password);
         }
+    }
+
+    private String getLibraryNumberFromUser(Console console) {
+        console.printMessage("> Enter library number: ");
+        String libraryNumber = console.getUserCommand();
+        return libraryNumber;
+    }
+
+    private String getPasswordFromUser(Console console) {
+        console.printMessage("> Enter password: ");
+        String password = console.getUserCommand();
+        return password;
     }
 
     private Boolean isAValidLibraryNumber(String libraryNumber) {
         return (libraryNumber != null && libraryNumber.matches("^[0-9]{3}-[0-9]{4}$"));
-    }
-
-    private Boolean isAValidPassword(String password) {
-        return (password != null && password.equals("ValidPassword"));
     }
 }
