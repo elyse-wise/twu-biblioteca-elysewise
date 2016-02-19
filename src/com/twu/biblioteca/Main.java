@@ -18,6 +18,7 @@ public class Main {
         menuOperations.add(new ViewUserDetailsMenuOperation("UD", "User Account Details"));
         menuOperations.add(new ListBooksMenuOperation("LB", "List Books"));
         menuOperations.add(new CheckoutBookMenuOperation("CB", "Checkout Book"));
+        menuOperations.add(new ListCheckedOutBooksMenuOperation("LCB", "List Checked Out Books"));
         menuOperations.add(new ReturnBookMenuOperation("RB", "Return Book"));
         menuOperations.add(new CheckoutMovieMenuOperation("CM", "Checkout Movie"));
         menuOperations.add(new ListMoviesMenuOperation("LM", "List Movies"));
@@ -60,6 +61,11 @@ public class Main {
 
         details = new UserDetails("Pippa", "pippa@gmail.com", "994353215");
         userList.add(new User("111-2222", "AnotherValidPassword", details));
+
+        details = new UserDetails("Administrator", "admin@biblioteca.com", "99998888");
+        User administratorUser = new User("000-1111", "AdminPassword", details);
+        administratorUser.giveAdministratorAccess();
+        userList.add(administratorUser);
 
         return userList;
     }
