@@ -39,4 +39,12 @@ public class User {
             return userDetails.getDetailsString();
         return "";
     }
+
+    public String getShortColumnString() {
+        return String.format("%-30s ", "User Library Number");
+    }
+
+    public String getShortDetailsString() {
+        return String.format("%-30.28s ", libraryNumber);
+    }
 }

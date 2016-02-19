@@ -36,6 +36,18 @@ public class UserTest {
     }
 
     @Test
+    public void testGetShortDetailsStringIncludesLibraryNumberOnly() {
+        String details = user.getShortDetailsString();
+        assertEquals(details.trim(), "123-4567");
+    }
+
+    @Test
+    public void testGetShortColumnStringIncludesLibraryNumberOnly() {
+        String details = user.getShortColumnString();
+        assertEquals(details.trim(), "User Library Number");
+    }
+
+    @Test
     public void testMatchOnSameLibraryNumberAndPassword() {
         assertTrue(user.matchedBy("123-4567", "Password"));
     }
