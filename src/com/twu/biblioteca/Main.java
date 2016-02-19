@@ -22,6 +22,7 @@ public class Main {
         menuOperations.add(new ReturnBookMenuOperation("RB", "Return Book"));
         menuOperations.add(new CheckoutMovieMenuOperation("CM", "Checkout Movie"));
         menuOperations.add(new ListMoviesMenuOperation("LM", "List Movies"));
+        menuOperations.add(new UserLogoutMenuOperation("LO", "User Logout"));
         menuOperations.add(new QuitMenuOperation("Q", "Quit"));
         return menuOperations;
     }
