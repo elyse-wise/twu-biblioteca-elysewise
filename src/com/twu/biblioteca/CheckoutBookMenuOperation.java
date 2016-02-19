@@ -10,6 +10,10 @@ public class CheckoutBookMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
+        if (library.numberOfBooksInLibrary() == 0) {
+            console.printMessage("There are no books available for checkout");
+            return;
+        }
         console.printMessage("Books available for checkout:");
         console.printLibraryItemList(library.availableBooks());
         console.printMessage("> Enter book number: ");

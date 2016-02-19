@@ -63,6 +63,25 @@ public class CheckoutMovieMenuOperationTest {
         verify(console).printMessage("> Enter movie number: ");
     }
 
+
+    @Test
+    public void testValidCheckoutMovieOptionGivesUserThankYouMessage() {
+        String commands[] = {"1"};
+        setUserInput(commands);
+
+        checkoutMovieMenuOperation.execute(library, console);
+        verify(console).printMessage("Thank you! Enjoy the movie");
+    }
+
+    @Test
+    public void testInvalidCheckoutMovieOptionWarnsUser() {
+        String commands[] = {"-23"};
+        setUserInput(commands);
+
+        checkoutMovieMenuOperation.execute(library, console);
+        verify(console).printMessage("That movie is not available");
+    }
+
     @Test
     public void testValidCheckoutMovieOptionRemovesMovieFromList() {
         String commands[] = {"1"};
@@ -91,6 +110,15 @@ public class CheckoutMovieMenuOperationTest {
         checkoutMovieMenuOperation.execute(library, console);
         verify(console, never()).warnInvalidMenuOption();
         verify(library, never()).checkOutMovie(-23);
+    }
+
+    @Test
+    public void testWarnsUserIfNoMoviesAreAvailable() {
+        when(library.numberOfMoviesInLibrary()).thenReturn(0);
+
+        checkoutMovieMenuOperation.execute(library, console);
+        verify(console).printMessage("There are no movies available for checkout");
+
     }
 
     @Test

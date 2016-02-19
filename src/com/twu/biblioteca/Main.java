@@ -14,15 +14,15 @@ public class Main {
 
     private static List<MenuOperation> buildMenuOperations() {
         List<MenuOperation> menuOperations = new ArrayList<MenuOperation>();
-        menuOperations.add(new UserLoginMenuOperation("UL", "User Login"));
-        menuOperations.add(new ViewUserDetailsMenuOperation("UD", "User Account Details"));
+        menuOperations.add(new UserLoginMenuOperation("L", "Login"));
+        menuOperations.add(new ViewUserDetailsMenuOperation("A", "Account Details"));
         menuOperations.add(new ListBooksMenuOperation("LB", "List Books"));
-        menuOperations.add(new CheckoutBookMenuOperation("CB", "Checkout Book"));
-        menuOperations.add(new ListCheckedOutBooksMenuOperation("LCB", "List Checked Out Books"));
-        menuOperations.add(new ReturnBookMenuOperation("RB", "Return Book"));
-        menuOperations.add(new CheckoutMovieMenuOperation("CM", "Checkout Movie"));
         menuOperations.add(new ListMoviesMenuOperation("LM", "List Movies"));
-        menuOperations.add(new UserLogoutMenuOperation("LO", "User Logout"));
+        menuOperations.add(new CheckoutBookMenuOperation("CB", "Checkout Book"));
+        menuOperations.add(new CheckoutMovieMenuOperation("CM", "Checkout Movie"));
+        menuOperations.add(new ReturnBookMenuOperation("RB", "Return Book"));
+        menuOperations.add(new ListCheckedOutBooksMenuOperation("VB", "View Book Checkout Details"));
+        menuOperations.add(new UserLogoutMenuOperation("X", "Logout"));
         menuOperations.add(new QuitMenuOperation("Q", "Quit"));
         return menuOperations;
     }

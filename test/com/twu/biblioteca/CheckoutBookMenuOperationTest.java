@@ -115,6 +115,16 @@ public class CheckoutBookMenuOperationTest {
         verify(library, never()).checkOutBook(-23);
     }
 
+
+    @Test
+    public void testWarnsUserIfNoBooksAreAvailable() {
+        when(library.numberOfBooksInLibrary()).thenReturn(0);
+
+        checkoutBookMenuOperation.execute(library, console);
+        verify(console).printMessage("There are no books available for checkout");
+
+    }
+
     @Test
     public void testUserNeedsToBeLoggedIn() {
         assertTrue(checkoutBookMenuOperation.needsLogin());

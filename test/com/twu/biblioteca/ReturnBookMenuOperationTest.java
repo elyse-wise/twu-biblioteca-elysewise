@@ -117,6 +117,14 @@ public class ReturnBookMenuOperationTest {
     }
 
     @Test
+    public void testWarnsUserIfNoBooksAreCheckedOut() {
+        when(library.numberOfBooksCheckedOut()).thenReturn(0);
+
+        returnBookMenuOperation.execute(library, console);
+        verify(console).printMessage("There are no books available for return");
+    }
+
+    @Test
     public void testUserNeedsToBeLoggedIn() {
         assertTrue(returnBookMenuOperation.needsLogin());
     }
