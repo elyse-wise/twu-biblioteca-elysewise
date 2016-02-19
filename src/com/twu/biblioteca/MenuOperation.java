@@ -29,6 +29,10 @@ public abstract class MenuOperation {
         return false;
     }
 
+    public Boolean needsAdministratorLogin() {
+        return false;
+    }
+
     abstract void execute(Library library, Console console);
 
 }
