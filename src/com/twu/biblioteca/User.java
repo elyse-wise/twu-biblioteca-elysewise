@@ -5,37 +5,36 @@ package com.twu.biblioteca;
  */
 public class User {
 
-    String username;
+    String libraryNumber;
     String password;
-    String name;
-    String email;
-    String phone;
+    UserDetails userDetails;
 
-    public User(String username, String password, String name, String email, String phone) {
-        this.username = username;
+    public User(String libraryNumber, String password) {
+        this.libraryNumber = libraryNumber;
         this.password = password;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
+        this.userDetails = null;
     }
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String libraryNumber, String password, UserDetails userDetails) {
+        this.libraryNumber = libraryNumber;
         this.password = password;
-        this.name = null;
-        this.email = null;
-        this.phone = null;
+        this.userDetails = userDetails;
     }
+
+    public Boolean matchedBy(String libraryNumber, String password) {
+        return (this.libraryNumber.equals(libraryNumber) && this.password.equals(password));
+    }
+
 
     public String getColumnString() {
-        return String.format("%-30s %-30s %-30s", "Name", "Email Address", "Phone Number");
+        if (userDetails != null)
+            return userDetails.getColumnString();
+        return "";
     }
 
     public String getDetailsString() {
-        return String.format("%-30.28s %-30.28s %-30.28s", name, email, phone);
-    }
-
-    public Boolean matchedBy(String username, String password) {
-        return (this.username.equals(username) && this.password.equals(password));
+        if (userDetails != null)
+            return userDetails.getDetailsString();
+        return "";
     }
 }

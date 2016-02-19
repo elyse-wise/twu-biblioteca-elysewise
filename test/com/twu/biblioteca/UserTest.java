@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 
 /**
  * Created by Elyse on 18/02/2016.
@@ -11,43 +14,25 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     private User user;
+    private UserDetails userDetails;
 
 
     @Before
     public void setup() {
-        user = new User("123-4567", "Password", "MyName", "MyEmail", "MyPhoneNumber");
+        userDetails = mock(UserDetails.class);
+        user = new User("123-4567", "Password", userDetails);
     }
 
     @Test
-    public void testGetUserDetailsReturnsName() {
-        String details = user.getDetailsString();
-        assertTrue(details.contains("MyName"));
+    public void testGetsDetailsStringFromUserDetailsObject() {
+        user.getDetailsString();
+        verify(userDetails).getDetailsString();
     }
 
     @Test
-    public void testGetUserDetailsReturnsEmailAddress() {
-        String details = user.getDetailsString();
-        assertTrue(details.contains("MyEmail"));
-    }
-
-    @Test
-    public void testGetUserDetailsReturnsPhoneNumber() {
-        String details = user.getDetailsString();
-        assertTrue(details.contains("MyPhone"));
-    }
-
-    @Test
-    public void testGetUserDetailsDoesNotReturnPassword() {
-        String details = user.getDetailsString();
-        assertFalse(details.contains("Password"));
-    }
-
-    @Test
-    public void getColumnsStringReturnsExpectedColumns() {
-        String details = user.getColumnString();
-        assertTrue(details.contains("Name"));
-        assertTrue(details.contains("Email Address"));
-        assertTrue(details.contains("Phone Number"));
+    public void testGetsColumnsStringFromUserDetailsObject() {
+        user.getColumnString();
+        verify(userDetails).getColumnString();
     }
 
     @Test
