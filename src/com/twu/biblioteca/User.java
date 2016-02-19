@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.List;
 
 /**
@@ -10,17 +12,28 @@ public class User {
     private String libraryNumber;
     private String password;
     private UserDetails userDetails;
+    private Boolean isAdministrator;
 
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.userDetails = null;
+        this.isAdministrator = false;
     }
 
     public User(String libraryNumber, String password, UserDetails userDetails) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.userDetails = userDetails;
+        this.isAdministrator = false;
+    }
+
+    public void giveAdministratorAccess() {
+        isAdministrator = true;
+    }
+
+    public Boolean hasAdministratorAccess() {
+        return isAdministrator;
     }
 
     public Boolean matchedBy(String libraryNumber, String password) {

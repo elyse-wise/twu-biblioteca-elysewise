@@ -61,4 +61,15 @@ public class UserTest {
     public void testNoMatchOnDifferentLibraryNumberAndSamePassword() {
         assertFalse(user.matchedBy("123-9967", "Password"));
     }
+
+    @Test
+    public void testHasNoAdministratorAccessByDefault() {
+        assertFalse(user.hasAdministratorAccess());
+    }
+
+    @Test
+    public void testHasAdministratorAccessAfterBeingGivenAccess() {
+        user.giveAdministratorAccess();
+        assertTrue(user.hasAdministratorAccess());
+    }
 }
