@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Elyse on 16/02/2016.
@@ -81,5 +82,26 @@ public class Console {
     public void printUserDetails(User user) {
         out.println(user.getColumnString());
         out.println(user.getDetailsString());
+    }
+
+    public void printCheckedOutBooksColumns(Book book, User user) {
+        out.print(user.getShortColumnString());
+        out.println(book.getColumnString());
+    }
+
+    public void printCheckedOutBooksDetails(Book book, User user) {
+        out.print(user.getShortDetailsString());
+        out.println(book.getDetailsString());
+    }
+
+    public void printCheckedOutBooksBorrowerInformation(Map<Book, User> checkedOutBooks) {
+        Boolean headersPrinted = false;
+        for (Map.Entry<Book, User> entry : checkedOutBooks.entrySet()) {
+            if (!headersPrinted) {
+                printCheckedOutBooksColumns(entry.getKey(), entry.getValue());
+                headersPrinted = true;
+            }
+            printCheckedOutBooksDetails(entry.getKey(), entry.getValue());
+        }
     }
 }

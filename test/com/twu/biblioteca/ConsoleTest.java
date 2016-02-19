@@ -7,7 +7,9 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
@@ -108,5 +110,86 @@ public class ConsoleTest {
         console.printUserDetails(user);
         verify(user, times(1)).getDetailsString();
     }
+
+
+    @Test
+    public void testUserShortColumnsArePrintedWhenShowingBookBorrowerInformation() {
+        User user = mock(User.class);
+        Book book = mock(Book.class);
+        console.printCheckedOutBooksColumns(book, user);
+        verify(user, times(1)).getShortColumnString();
+    }
+
+
+    @Test
+    public void testUserShortDetailsArePrintedWhenShowingBookBorrowerInformation() {
+        User user = mock(User.class);
+        Book book = mock(Book.class);
+        console.printCheckedOutBooksDetails(book, user);
+        verify(user, times(1)).getShortDetailsString();
+    }
+
+    @Test
+    public void testBookColumnsArePrintedWhenShowingBookBorrowerInformation() {
+        User user = mock(User.class);
+        Book book = mock(Book.class);
+        console.printCheckedOutBooksColumns(book, user);
+        verify(book, times(1)).getColumnString();
+    }
+
+    @Test
+    public void testBookDetailsArePrintedWhenShowingBookBorrowerInformation() {
+        User user = mock(User.class);
+        Book book = mock(Book.class);
+        console.printCheckedOutBooksDetails(book, user);
+        verify(book, times(1)).getDetailsString();
+    }
+
+    @Test
+    public void testNoItemsArePrintedWhenBookBorrowListIsEmpty() {
+        console.printCheckedOutBooksBorrowerInformation(new LinkedHashMap<Book, User>());
+        verify(out, never()).println();
+    }
+
+    @Test
+    public void testAllBooksPrintedWhenBookBorrowListHasMultipleItems() {
+        Map<Book, User> checkedOutBookInformation = new LinkedHashMap<Book, User>();
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        Book book3 = mock(Book.class);
+        User user1 = mock(User.class);
+        User user2 = mock(User.class);
+        User user3 = mock(User.class);
+
+        checkedOutBookInformation.put(book1, user1);
+        checkedOutBookInformation.put(book2, user2);
+        checkedOutBookInformation.put(book3, user3);
+
+        console.printCheckedOutBooksBorrowerInformation(checkedOutBookInformation);
+        verify(book1, times(1)).getDetailsString();
+        verify(book2, times(1)).getDetailsString();
+        verify(book3, times(1)).getDetailsString();
+    }
+
+    @Test
+    public void testAllUsersPrintedWhenBookBorrowListHasMultipleItems() {
+        Map<Book, User> checkedOutBookInformation = new LinkedHashMap<Book, User>();
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        Book book3 = mock(Book.class);
+        User user1 = mock(User.class);
+        User user2 = mock(User.class);
+        User user3 = mock(User.class);
+
+        checkedOutBookInformation.put(book1, user1);
+        checkedOutBookInformation.put(book2, user2);
+        checkedOutBookInformation.put(book3, user3);
+
+        console.printCheckedOutBooksBorrowerInformation(checkedOutBookInformation);
+        verify(user1, times(1)).getShortDetailsString();
+        verify(user2, times(1)).getShortDetailsString();
+        verify(user3, times(1)).getShortDetailsString();
+    }
+
 
 }
