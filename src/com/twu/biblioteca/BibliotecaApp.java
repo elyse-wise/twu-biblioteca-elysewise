@@ -39,7 +39,10 @@ public class BibliotecaApp {
 
     private List<MenuOperation> availableMenuOperations() {
         if (library.userLoggedIn()) {
-            return menuOperations;
+            if (library.administratorLoggedIn()) {
+                return menuOperations;
+            }
+            return menuOperationsThatDoNotRequireAdministrativeAccess();
         }
         return menuOperationsThatDoNotRequireLogin();
     }
@@ -48,6 +51,16 @@ public class BibliotecaApp {
         List<MenuOperation> availableOperations = new ArrayList<MenuOperation>();
         for (MenuOperation op : menuOperations) {
             if (!op.needsLogin()) {
+                availableOperations.add(op);
+            }
+        }
+        return availableOperations;
+    }
+
+    private List<MenuOperation> menuOperationsThatDoNotRequireAdministrativeAccess() {
+        List<MenuOperation> availableOperations = new ArrayList<MenuOperation>();
+        for (MenuOperation op : menuOperations) {
+            if (!op.needsAdministratorLogin()) {
                 availableOperations.add(op);
             }
         }

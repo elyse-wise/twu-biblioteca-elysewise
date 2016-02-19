@@ -17,45 +17,46 @@ public class BibliotecaAppTest {
     private BibliotecaApp application;
     private Console console;
     private Library library;
-    private List<MenuOperation> allMenuOptions;
-    private List<MenuOperation> menuOptionsWithNoLoginRequired;
+    private List<MenuOperation> menuOperations;
+
 
     @Before
     public void setup() {
         console = mock(Console.class);
         library = buildMockLibraryWithSetBookAmounts(3, 4);
-        allMenuOptions = new ArrayList<MenuOperation>();
-        menuOptionsWithNoLoginRequired = new ArrayList<MenuOperation>();
+        menuOperations = new ArrayList<MenuOperation>();
 
-        addMockListBooksMenuOperation();
-        addMockQuitMenuOperation();
-        addMockMenuOperationWithLoginRequired(false);
-        addMockMenuOperationWithLoginRequired(true);
+        menuOperations.add(buildMockListBooksMenuOperation());
+        menuOperations.add(buildMockQuitMenuOperation());
+        menuOperations.add(buildMockMenuOperationWithAccessControl(true, false));
+        menuOperations.add(buildMockMenuOperationWithAccessControl(true, true));
 
-        application = new BibliotecaApp(console, library, allMenuOptions);
+        application = new BibliotecaApp(console, library, menuOperations);
     }
 
-    public void addMockListBooksMenuOperation() {
+    private MenuOperation buildMockListBooksMenuOperation() {
         MenuOperation op = mock(ListBooksMenuOperation.class);
+        when(op.needsLogin()).thenReturn(false);
+        when(op.needsAdministratorLogin()).thenReturn(false);
         when(op.isTriggeredBy("l")).thenReturn(true);
         when(op.isTriggeredBy("L")).thenReturn(true);
-        allMenuOptions.add(op);
-        menuOptionsWithNoLoginRequired.add(op);
+        return op;
     }
 
-    public void addMockQuitMenuOperation() {
+    private MenuOperation buildMockQuitMenuOperation() {
         MenuOperation op = mock(QuitMenuOperation.class);
+        when(op.needsLogin()).thenReturn(false);
+        when(op.needsAdministratorLogin()).thenReturn(false);
         when(op.isTriggeredBy("q")).thenReturn(true);
         when(op.isTriggeredBy("Q")).thenReturn(true);
-        allMenuOptions.add(op);
-        menuOptionsWithNoLoginRequired.add(op);
+        return op;
     }
 
-    public void addMockMenuOperationWithLoginRequired(Boolean loginRequired) {
+    private MenuOperation buildMockMenuOperationWithAccessControl(Boolean loginRequired, Boolean adminRequired) {
         MenuOperation op = mock(MenuOperation.class);
         when(op.needsLogin()).thenReturn(loginRequired);
-        allMenuOptions.add(op);
-        if (!loginRequired) menuOptionsWithNoLoginRequired.add(op);
+        when(op.needsAdministratorLogin()).thenReturn(adminRequired);
+        return op;
     }
 
     private Library buildMockLibraryWithSetBookAmounts(int numberOfBooksAvailable, int numberOfBooksCheckedOut) {
@@ -69,6 +70,24 @@ public class BibliotecaAppTest {
             when(library.bookIsCheckedOut(i)).thenReturn(true);
         }
         return library;
+    }
+
+    private List<MenuOperation> menuOptionsWithNoLoginRequired() {
+        List<MenuOperation> operations = new ArrayList<MenuOperation>();
+        for (MenuOperation op : menuOperations) {
+            if (!op.needsLogin())
+                operations.add(op);
+        }
+        return operations;
+    }
+
+    private List<MenuOperation> menuOptionsWithNoAdminRequired() {
+        List<MenuOperation> operations = new ArrayList<MenuOperation>();
+        for (MenuOperation op : menuOperations) {
+            if (!op.needsAdministratorLogin())
+                operations.add(op);
+        }
+        return operations;
     }
 
     @Test
@@ -86,7 +105,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console).printMenuOptions(menuOptionsWithNoLoginRequired);
+        verify(console).printMenuOptions(menuOptionsWithNoLoginRequired());
     }
 
     @Test
@@ -123,7 +142,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console).printMenuOptions(menuOptionsWithNoLoginRequired);
+        verify(console).printMenuOptions(menuOptionsWithNoLoginRequired());
     }
 
     @Test
@@ -133,7 +152,7 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console).printMenuOptions(allMenuOptions);
+        verify(console).printMenuOptions(menuOptionsWithNoAdminRequired());
     }
 
     @Test
@@ -143,8 +162,33 @@ public class BibliotecaAppTest {
         setUserInput(commands);
 
         application.run();
-        verify(console,never()).printMenuOptions(allMenuOptions);
+        verify(console, never()).printMenuOptions(menuOperations);
     }
+
+    @Test
+    public void testDoesNotShowMenuOperationsThatRequireAdminWhenRegularUserIsLoggedIn() {
+        when(library.userLoggedIn()).thenReturn(true);
+        when(library.administratorLoggedIn()).thenReturn(false);
+
+        String commands[] = {"Q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console, never()).printMenuOptions(menuOperations);
+    }
+
+    @Test
+    public void testShowsMenuOperationsThatRequireAdminWhenAdminUserIsLoggedIn() {
+        when(library.userLoggedIn()).thenReturn(true);
+        when(library.administratorLoggedIn()).thenReturn(true);
+
+        String commands[] = {"Q"};
+        setUserInput(commands);
+
+        application.run();
+        verify(console).printMenuOptions(menuOperations);
+    }
+
 
     private void setUserInput(String inputs[]) {
         List<String> inputList = Arrays.asList(inputs);
