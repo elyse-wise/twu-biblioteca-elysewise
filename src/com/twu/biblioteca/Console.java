@@ -79,6 +79,7 @@ public class Console {
     }
 
     public void printUserDetails(User user) {
-
+        out.println(user.getColumnString());
+        out.println(user.getDetailsString());
     }
 }

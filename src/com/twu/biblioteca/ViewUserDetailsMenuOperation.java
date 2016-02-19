@@ -11,6 +11,11 @@ public class ViewUserDetailsMenuOperation extends MenuOperation {
 
     @Override
     void execute(Library library, Console console) {
-        // TODO
+        console.printUserDetails(library.activeUser());
+    }
+
+    @Override
+    public Boolean needsLogin() {
+        return true;
     }
 }
