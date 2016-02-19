@@ -27,7 +27,6 @@ public class Main {
     private static Library buildLibrary() {
         Library library = new Library();
         library.setAvailableBooks(buildAvailableBooks());
-        library.setCheckedOutBooks(buildCheckedOutBooks());
         library.setAvailableMovies(buildAvailableMovies());
         library.setUserAccounts(buildUserAccounts());
         return library;
@@ -41,14 +40,6 @@ public class Main {
         books.add(new Book("The Little Prince", "Antoine De-Saint Exupery", "1943"));
         books.add(new Book("The Da Vinci Code", "Dan Brown", "2003"));
         books.add(new Book("Black Beauty", "Anna Sewell", "1877"));
-        return books;
-    }
-
-    private static List<Book> buildCheckedOutBooks() {
-        List<Book> books = new ArrayList<Book>();
-        books.add(new Book("The Hobbit", "J.R.R. Tolkein", "1937"));
-        books.add(new Book("The Lion, The Witch and The Wardrobe", "C.S. Lewis", "1950"));
-        books.add(new Book("Charlotte's Web", "E.B. White", "1952"));
         return books;
     }
 

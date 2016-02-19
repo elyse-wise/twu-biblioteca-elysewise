@@ -1,13 +1,15 @@
 package com.twu.biblioteca;
 
+import java.util.List;
+
 /**
  * Created by Elyse on 18/02/2016.
  */
 public class User {
 
-    String libraryNumber;
-    String password;
-    UserDetails userDetails;
+    private String libraryNumber;
+    private String password;
+    private UserDetails userDetails;
 
     public User(String libraryNumber, String password) {
         this.libraryNumber = libraryNumber;

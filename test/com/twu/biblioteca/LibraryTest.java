@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -21,7 +22,7 @@ public class LibraryTest {
         //start with library of 2 available books, 3 checked out books, 5 available movies
         library = new Library();
         library.setAvailableBooks(buildListOfMockBooksWithSetSize(2));
-        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(3));
+        library.setCheckedOutBooks(buildListOfMockCheckedBooksWithSetSize(3));
         library.setAvailableMovies(buildListOfMockMoviesWithSetSize(5));
         library.setUserAccounts(buildUserAccounts());
     }
@@ -36,6 +37,16 @@ public class LibraryTest {
         List<Book> bookList = new ArrayList<Book>();
         for (int i = 0; i < amountOfBooks; i++) {
             bookList.add(mock(Book.class));
+        }
+        return bookList;
+    }
+
+
+    private LinkedHashMap<Book, User> buildListOfMockCheckedBooksWithSetSize(int amountOfBooks) {
+        User mockUser = mock(User.class);
+        LinkedHashMap<Book, User> bookList = new LinkedHashMap<Book, User>();
+        for (int i = 0; i < amountOfBooks; i++) {
+            bookList.put(mock(Book.class), mockUser);
         }
         return bookList;
     }
@@ -92,21 +103,22 @@ public class LibraryTest {
 
     @Test
     public void testSetCheckedOutBooksUpdatesNumberOfBooksCheckedOut() {
-        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
-        library.setCheckedOutBooks(mockBookList);
+        library.setCheckedOutBooks(buildListOfMockCheckedBooksWithSetSize(76));
         assertEquals(76, library.numberOfBooksCheckedOut());
     }
 
     @Test
     public void testSetCheckedOutBooksUpdatesCheckedOutBooksInLibrary() {
-        List<Book> mockBookList = buildListOfMockBooksWithSetSize(76);
-        library.setCheckedOutBooks(mockBookList);
-        assertEquals(mockBookList, library.checkedOutBooks());
+        LinkedHashMap<Book, User> bookMap = buildListOfMockCheckedBooksWithSetSize(76);
+        library.setCheckedOutBooks(bookMap);
+        List<Book> bookList = new ArrayList<Book>();
+        bookList.addAll(bookMap.keySet());
+        assertEquals(bookList, library.checkedOutBooks());
     }
 
     @Test
     public void numberOfBooksCheckedOutReturnsZeroForEmptyBookList() {
-        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
+        library.setCheckedOutBooks(buildListOfMockCheckedBooksWithSetSize(0));
         assertEquals(0, library.numberOfBooksCheckedOut());
     }
 
@@ -117,7 +129,7 @@ public class LibraryTest {
 
     @Test
     public void testBookZeroIsNotCheckedOutWhenNoBooksAreCheckedOutOfLibrary() {
-        library.setCheckedOutBooks(buildListOfMockBooksWithSetSize(0));
+        library.setCheckedOutBooks(buildListOfMockCheckedBooksWithSetSize(0));
         assertFalse(library.bookIsCheckedOut(0));
     }
 

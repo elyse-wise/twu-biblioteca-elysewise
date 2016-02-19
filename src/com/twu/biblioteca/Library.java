@@ -1,23 +1,20 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Elyse on 17/02/2016.
  */
 public class Library {
+    LinkedHashMap<Book, User> checkedOutBooks;
     private List<Book> availableBooks;
-    private List<Book> checkedOutBooks;
     private List<Movie> availableMovies;
     private List<User> userAccounts;
     private User activeUser;
 
     public Library() {
         this.availableBooks = new ArrayList<Book>();
-        this.checkedOutBooks = new ArrayList<Book>();
+        this.checkedOutBooks = new LinkedHashMap<Book, User>();
         this.availableMovies = new ArrayList<Movie>();
         this.userAccounts = new ArrayList<User>();
     }
@@ -54,7 +51,7 @@ public class Library {
         this.availableBooks = availableBooks;
     }
 
-    public void setCheckedOutBooks(List<Book> checkedOutBooks) {
+    public void setCheckedOutBooks(LinkedHashMap<Book, User> checkedOutBooks) {
         this.checkedOutBooks = checkedOutBooks;
     }
 
@@ -83,7 +80,9 @@ public class Library {
     }
 
     public List<Book> checkedOutBooks() {
-        return checkedOutBooks;
+        List<Book> bookList = new ArrayList<Book>();
+        bookList.addAll(checkedOutBooks.keySet());
+        return bookList;
     }
 
     public List<Movie> availableMovies() {
@@ -105,13 +104,14 @@ public class Library {
     public void checkOutBook(int bookIndex) {
         if (bookIsAvailable(bookIndex)) {
             Book b = availableBooks.remove(bookIndex);
-            checkedOutBooks.add(b);
+            checkedOutBooks.put(b, activeUser);
         }
     }
 
     public void returnBook(int bookIndex) {
         if (bookIsCheckedOut(bookIndex)) {
-            Book b = checkedOutBooks.remove(bookIndex);
+            Book b = checkedOutBooks().get(bookIndex);
+            checkedOutBooks.remove(b);
             availableBooks.add(b);
         }
     }
