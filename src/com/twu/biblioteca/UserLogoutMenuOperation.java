@@ -11,6 +11,7 @@ public class UserLogoutMenuOperation extends MenuOperation {
     @Override
     void execute(Library library, Console console) {
         library.logoutUser();
+        console.printMessage("You have successfully logged out.");
     }
 
     @Override

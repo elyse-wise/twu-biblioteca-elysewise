@@ -12,10 +12,14 @@ import static org.mockito.Mockito.*;
 public class UserLogoutMenuOperationTest {
 
     UserLogoutMenuOperation userLogoutMenuOperation;
+    Library library;
+    Console console;
 
     @Before
     public void setup() {
         this.userLogoutMenuOperation = new UserLogoutMenuOperation("LO", "User Logout");
+        this.library = mock(Library.class);
+        this.console = mock(Console.class);
     }
 
     @Test
@@ -25,9 +29,14 @@ public class UserLogoutMenuOperationTest {
 
     @Test
     public void testUserIsLoggedOutOnExecution() {
-        Library library = mock(Library.class);
-        userLogoutMenuOperation.execute(library, mock(Console.class));
+        userLogoutMenuOperation.execute(library, console);
         verify(library).logoutUser();
+    }
+
+    @Test
+    public void testSuccessfulLogoutMessageIsPrinted() {
+        userLogoutMenuOperation.execute(library, console);
+        verify(console).printMessage("You have successfully logged out.");
     }
 
 }
