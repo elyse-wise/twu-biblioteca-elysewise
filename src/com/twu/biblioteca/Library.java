@@ -28,15 +28,13 @@ public class Library {
         return null;
     }
 
-    public Boolean validUserLogin(String libraryNumber, String password) {
-        return (getUserWithCredentials(libraryNumber, password) != null);
-    }
-
-    public void attemptUserLogin(String libraryNumber, String password) {
+    public boolean attemptUserLogin(String libraryNumber, String password) {
         User u = getUserWithCredentials(libraryNumber, password);
         if (u != null) {
             setActiveUser(u);
+            return true;
         }
+        return false;
     }
 
     private void setActiveUser(User activeUser) {

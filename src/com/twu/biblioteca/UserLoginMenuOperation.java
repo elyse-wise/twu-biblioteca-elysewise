@@ -13,7 +13,12 @@ public class UserLoginMenuOperation extends MenuOperation {
         String libraryNumber = getLibraryNumberFromUser(console);
         if (isAValidLibraryNumber(libraryNumber)) {
             String password = getPasswordFromUser(console);
-            library.attemptUserLogin(libraryNumber, password);
+            if (library.attemptUserLogin(libraryNumber, password)) {
+                console.printMessage("You are now logged in");
+            }
+            console.printMessage("Your attempt was unsuccessful");
+        } else {
+            console.printMessage("Invalid library number");
         }
     }
 

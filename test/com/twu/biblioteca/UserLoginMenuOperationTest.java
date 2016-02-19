@@ -75,6 +75,34 @@ public class UserLoginMenuOperationTest {
         verify(library, never()).attemptUserLogin(validLibraryNumber, "ValidPassword");
     }
 
+    @Test
+    public void testWarnsWhenUserEntersInvalidLibraryNumber() {
+        String commands[] = {"%*&*^%*^*", "*&^%*&^%**%&*"};
+        setUserInput(commands);
+
+        userLoginMenuOperation.execute(library, console);
+        verify(console).printMessage("Invalid library number");
+    }
+
+    @Test
+    public void testWarnsUnsuccessfulWhenUserAccountDoesNotExist() {
+        String commands[] = {validLibraryNumber, "&^%*&^%**&^%*"};
+        setUserInput(commands);
+
+        userLoginMenuOperation.execute(library, console);
+        verify(console).printMessage("Your attempt was unsuccessful");
+    }
+
+    @Test
+    public void testDisplaysuccessMessageWhenUserLogsIn() {
+        when(library.attemptUserLogin(validLibraryNumber, "ValidPassword")).thenReturn(true);
+        String commands[] = {validLibraryNumber, "ValidPassword"};
+        setUserInput(commands);
+
+        userLoginMenuOperation.execute(library, console);
+        verify(console).printMessage("You are now logged in");
+    }
+
     private void setUserInput(String inputs[]) {
         List<String> inputList = Arrays.asList(inputs);
         when(console.getUserCommand()).thenAnswer(AdditionalAnswers.returnsElementsOf(inputList));

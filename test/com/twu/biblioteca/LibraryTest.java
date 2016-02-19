@@ -261,17 +261,17 @@ public class LibraryTest {
 
     @Test
     public void testValidLoginWhenLibraryNumberAndPasswordMatch() {
-        assertTrue(library.validUserLogin("123-4567", "myPassword"));
+        assertTrue(library.attemptUserLogin("123-4567", "myPassword"));
     }
 
     @Test
     public void testInValidLoginWhenLibraryNumberMatchesAndPasswordDoesNotMatch() {
-        assertFalse(library.validUserLogin("123-4567", "&*^%&*^%*&*"));
+        assertFalse(library.attemptUserLogin("123-4567", "&*^%&*^%*&*"));
     }
 
     @Test
     public void testInValidLoginWhenLibraryNumberDoesNotMatchAndPasswordDoes() {
-        assertFalse(library.validUserLogin("123-4588", "myPassword"));
+        assertFalse(library.attemptUserLogin("123-4588", "myPassword"));
     }
 
 
