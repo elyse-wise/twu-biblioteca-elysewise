@@ -29,7 +29,17 @@ public class LibraryTest {
 
     private List<User> buildUserAccounts() {
         List<User> userAccounts = new ArrayList<User>();
-        userAccounts.add(new User("123-4567", "myPassword"));
+
+        User regularUser = mock(User.class);
+        when(regularUser.matchedBy("123-4567", "myPassword")).thenReturn(true);
+        when(regularUser.hasAdministratorAccess()).thenReturn(false);
+        userAccounts.add(regularUser);
+
+        User administrator = mock(User.class);
+        when(administrator.matchedBy("000-1111", "administratorPassword")).thenReturn(true);
+        when(administrator.hasAdministratorAccess()).thenReturn(true);
+        userAccounts.add(administrator);
+
         return userAccounts;
     }
 
@@ -250,7 +260,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void getUserLoggedInAsTrueIfUserIsNotLoggedIn() {
+    public void getUserLoggedInAsFalseIfUserIsNotLoggedIn() {
         assertFalse(library.userLoggedIn());
     }
 
@@ -259,16 +269,38 @@ public class LibraryTest {
         assertTrue(library.validUserLogin("123-4567", "myPassword"));
     }
 
-
     @Test
     public void testInValidLoginWhenLibraryNumberMatchesAndPasswordDoesNotMatch() {
         assertFalse(library.validUserLogin("123-4567", "&*^%&*^%*&*"));
     }
 
-
     @Test
     public void testInValidLoginWhenLibraryNumberDoesNotMatchAndPasswordDoes() {
         assertFalse(library.validUserLogin("123-4588", "myPassword"));
+    }
+
+
+    @Test
+    public void getAdministratorLoggedInIsFalseByDefault() {
+        assertFalse(library.administratorLoggedIn());
+    }
+
+    @Test
+    public void getAdministratorLoggedInAsTrueIfAdministrativeUserIsLoggedIn() {
+        library.attemptUserLogin("000-1111", "administratorPassword");
+        assertTrue(library.administratorLoggedIn());
+    }
+
+    @Test
+    public void getAdministratorLoggedInAsFalseIfUserIsNotLoggedIn() {
+        assertFalse(library.administratorLoggedIn());
+    }
+
+
+    @Test
+    public void getAdministratorLoggedInAsFalseIfUserWithoutAdminAccessIsLoggedIn() {
+        library.attemptUserLogin("123-4567", "myPassword");
+        assertFalse(library.administratorLoggedIn());
     }
 
 }

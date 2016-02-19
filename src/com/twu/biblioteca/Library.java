@@ -51,6 +51,11 @@ public class Library {
         return (activeUser != null);
     }
 
+
+    public Boolean administratorLoggedIn() {
+        return (userLoggedIn() && activeUser.hasAdministratorAccess());
+    }
+
     public void setAvailableBooks(List<Book> availableBooks) {
         this.availableBooks = availableBooks;
     }
