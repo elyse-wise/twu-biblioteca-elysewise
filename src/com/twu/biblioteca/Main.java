@@ -15,6 +15,7 @@ public class Main {
     private static List<MenuOperation> buildMenuOperations() {
         List<MenuOperation> menuOperations = new ArrayList<MenuOperation>();
         menuOperations.add(new UserLoginMenuOperation("UL", "User Login"));
+        menuOperations.add(new ViewUserDetailsMenuOperation("UD", "User Account Details"));
         menuOperations.add(new ListBooksMenuOperation("LB", "List Books"));
         menuOperations.add(new CheckoutBookMenuOperation("CB", "Checkout Book"));
         menuOperations.add(new ReturnBookMenuOperation("RB", "Return Book"));
