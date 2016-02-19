@@ -5,8 +5,8 @@ package com.twu.biblioteca;
  */
 public interface LibraryItem {
 
-    public String getColumnString();
+    String getColumnString();
 
-    public String getDetailsString();
+    String getDetailsString();
 
 }
